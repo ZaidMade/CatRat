@@ -1,4 +1,4 @@
-# CatRat
+# Cat-N-Rat
 A game I'm making for no reason.
 
 ### Description
