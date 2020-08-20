@@ -8,7 +8,8 @@ const sprites = {
   CAT: [0, 1],
   RAT: [2, 1],
   DEVIL: [4, 1],
-  WALL: [0, 0]
+  WALL: [0, 0],
+  KILL: [2, 0]
 }
 
 const types = {

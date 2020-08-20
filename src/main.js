@@ -1,5 +1,6 @@
+var title;
 var canvas, context;
-var tiles = [null, false];  // Tiles image and loaded flag
+var tiles = [null, false, false];  // Tiles image, loaded flag and 2nd image flag
 
 function loadTiles(){
   // Load the tiles image in and raise the tiles loaded flag
@@ -10,9 +11,16 @@ function loadTiles(){
 
 // Initialize the game on document load.
 $(function(){
+  title = document.getElementById("title")
   canvas = document.getElementById("game");
   context = canvas.getContext("2d");
   requestAnimationFrame(draw);
+
+  // Set up the sprite wiggle
+  setInterval(function(){
+    tiles[2] = !tiles[2];
+    draw();
+  }, 750);
 
   loadTiles();
   loadLevel();

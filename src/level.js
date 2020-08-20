@@ -10,6 +10,7 @@ var rat = makeEntity(15, 11, 'RAT');
 
 function loadLevel(){
   makeEntity(8, 2, 'WALL');
+  makeEntity(8, 5, 'KILL');
 }
 
 function drawLevel(){
@@ -19,8 +20,14 @@ function drawLevel(){
   // Draw all entities
   for(var i = 0; i < entities.length; i++){
     var e = entities[i];
+
+    // Select the alternate sprite when 2nd image flag is raised
+    var eSpriteX = e.sprite[0];
+    if(tiles[2]){ eSpriteX++; };
+
+    // Draw the sprite at the entity position
     context.drawImage(tiles[0],
-      e.sprite[0]*TILE_SIZE, e.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+      eSpriteX*TILE_SIZE, e.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
       e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE,
     );
   }
