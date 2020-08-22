@@ -11,3 +11,6 @@ A game I'm making for no reason.
 * __SWAP__: A cell which swaps the positions of the cat and the rat when touched by one of them.
 * __PORTAL__: Two linked entities that either the cat or the rat will warp to when touched.
 * __GATE&KEY__: A wall cell that is deleted when a linked key entity is brought to it.
+
+### Dependencies
+* JQuery 3.5.1

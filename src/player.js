@@ -1,5 +1,8 @@
 // Function to move the cat and the rat
 function moveCatNRat(_dir){
+  // Check for Game Over
+  if(cat == undefined || rat == undefined){ return; }
+
   // Make temporary copies of the cat and rat positions for moving
   var tCat = { x: cat.x, y: cat.y };
   var tRat = { x: rat.x, y: rat.y };
@@ -22,8 +25,8 @@ function moveCatNRat(_dir){
   });
 
   // Check the positions to move to against the entities list
-  var catHalt = false;  // Flag to stop the cat from moving
-  var ratHalt = false;  // Flag to stop the rat from moving
+  var halt = [false, false];  // Flag to stop them from moving [cat, rat]
+  var kill = [false, false];  // Flag to kill them [cat, rat]
   for(var _i = 0; _i < entities.length; _i++){
     var e = entities[_i];
 
@@ -31,21 +34,31 @@ function moveCatNRat(_dir){
     switch(e.type){
       // Stop if going to move into a wall
       case types.WALL:
-        if(e.x == tCat.x && e.y == tCat.y){ catHalt = true; }
-        if(e.x == tRat.x && e.y == tRat.y){ ratHalt = true; }
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
         break;
       // Fail the level if going to move into a kill block
       case types.KILL:
-        if((e.x == tCat.x && e.y == tCat.y) || (e.x == tRat.x && e.y == tRat.y)){
-          title.innerText = "Game Over!";
-        }
+        if(e.x == tCat.x && e.y == tCat.y){ kill[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){ kill[1] = true; }
         break;
     }
   }
 
-  // Move the cat to tCat
-  if(!catHalt){ cat.x = tCat.x; cat.y = tCat.y; }
-  // Move the rat to tRat
-  if(!ratHalt){ rat.x = tRat.x; rat.y = tRat.y; }
+  if(
+    (tCat.x == rat.x && tCat.y == rat.y &&
+    tRat.x == cat.x && tRat.y == cat.y) ||
+    (tCat.x == tRat.x && tCat.y == tRat.y)
+  ){
+    // LEVEL PASSED!!
+    clearLevel();
+  }
 
+  // Move the cat and rat
+  if(!halt[0]){ cat.x = tCat.x; cat.y = tCat.y; }
+  if(!halt[1]){ rat.x = tRat.x; rat.y = tRat.y; }
+
+  // Kill the cat and rat
+  if(kill[0]){ cat = undefined; console.log("GAME OVER! CAT DIED T_T"); }
+  if(kill[1]){ rat = undefined; console.log("GAME OVER! RAT DIED Y_Y"); }
 }

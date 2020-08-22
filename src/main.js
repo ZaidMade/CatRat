@@ -1,6 +1,6 @@
 var title;
 var canvas, context;
-var tiles = [null, false, false];  // Tiles image, loaded flag and 2nd image flag
+var tiles = [null, false];  // Tiles image, loaded flag
 
 function loadTiles(){
   // Load the tiles image in and raise the tiles loaded flag
@@ -18,17 +18,27 @@ $(function(){
 
   // Set up the sprite wiggle
   setInterval(function(){
-    tiles[2] = !tiles[2];
+    for(var i = 0; i < entities.length; i++){ entities[i].bop = !entities[i].bop }
     draw();
   }, 750);
 
   loadTiles();
-  loadLevel();
+  loadLevel(tmp_level);
   main();
 });
 
 // Handle keyboard input
 $(document).on("keypress", function(e){
+
+  if(e.which == 101){ // E
+    clearLevel();
+  }
+
+  // Reset the level
+  if(e.which == 114){  // R
+    clearLevel();
+    loadLevel(tmp_level);
+  }
 
   // WASD movement
   if(e.which == 119){ moveCatNRat(dir.UP); }    // W
