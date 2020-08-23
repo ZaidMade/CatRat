@@ -1,4 +1,6 @@
 function drawTitle(){
+  if(!pics[1]){ return; }
+
   var pic = pictures.PASSED;
 
   // Select the alternate picture when 2nd image flag is raised
