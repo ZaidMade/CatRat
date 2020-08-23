@@ -1,6 +1,8 @@
 var entities = [];
 var cat, rat;
 
+var moveCounter = 0;
+
 // Wrapper function to make entity loading a little easier
 function makeEntity(_x, _y, _type){
   return entities[entities.push(new Entity(_x, _y, _type)) - 1];
@@ -12,6 +14,8 @@ function clearLevel(){
 }
 
 function loadLevel(_dat = []){
+  moveCounter = 0;
+
   var posIter = [0, 0];
   for(var i = 0; i < _dat.length; i++){
     var t = _dat[i];
@@ -56,7 +60,10 @@ function drawLevel(){
     // Draw the sprite at the entity position
     context.drawImage(tiles[0],
       eSpriteX*TILE_SIZE, e.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
-      e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE,
+      e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
     );
+
+    context.fillStyle = "white";
+    context.fillText(String(moveCounter), 64, 64);
   }
 }

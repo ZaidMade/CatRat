@@ -45,18 +45,24 @@ function moveCatNRat(_dir){
     }
   }
 
+  // Check if the level was just passed
   if(
     (tCat.x == rat.x && tCat.y == rat.y &&
     tRat.x == cat.x && tRat.y == cat.y) ||
     (tCat.x == tRat.x && tCat.y == tRat.y)
   ){
     // LEVEL PASSED!!
+    mode = modes.TITLE;
     clearLevel();
+    return;
   }
 
   // Move the cat and rat
   if(!halt[0]){ cat.x = tCat.x; cat.y = tCat.y; }
   if(!halt[1]){ rat.x = tRat.x; rat.y = tRat.y; }
+
+  // Add to the move counter
+  if(!halt[0] || !halt[1]){ moveCounter++; }
 
   // Kill the cat and rat
   if(kill[0]){ cat = undefined; console.log("GAME OVER! CAT DIED T_T"); }
