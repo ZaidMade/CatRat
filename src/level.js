@@ -63,7 +63,44 @@ function drawLevel(){
       e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
     );
 
-    context.fillStyle = "white";
-    context.fillText(String(moveCounter), 64, 64);
+    drawText(String(moveCounter), 10, 15);
   }
+}
+
+// Draw the level passed screen
+function drawPassed(){
+  if(!pics[1]){ return; }
+
+  var pic = pictures.PASSED;
+
+  // Detemine the grade
+  var grade = (tmp_level.par / moveCounter) * 100;
+  if(grade >= 90){ grade = sprites.GRADE_A; }
+  else if(grade >= 80){ grade = sprites.GRADE_B; }
+  else if(grade >= 70){ grade = sprites.GRADE_C; }
+  else if(grade >= 60){ grade = sprites.GRADE_D; }
+  else{ grade = sprites.GRADE_F; }
+
+  // Select the alternate picture when 2nd image flag is raised
+  var picX = pic[0];
+  if(drawBop){ picX++; }
+
+  // Draw the picture for the title
+  context.drawImage(pics[0],
+    picX*CANVAS_SIZE[0], pic[1]*CANVAS_SIZE[1], CANVAS_SIZE[0], CANVAS_SIZE[1],
+    0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
+  );
+
+  if(drawBop){ drawText("[press a key]", 310, 300, "left", "#bbb"); }
+
+  drawText("Moves: " + String(moveCounter) + "/" + String(tmp_level.par), 310, 190);
+  drawText("Grade:", 310, 240);
+
+  // Draw the grade
+  var gradeX = grade[0];
+  if(drawBop){ gradeX++; }
+  context.drawImage(tiles[0],
+    gradeX*TILE_SIZE, grade[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+    390, 220, TILE_SIZE, TILE_SIZE
+  );
 }

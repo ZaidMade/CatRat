@@ -6,9 +6,12 @@ const CANVAS_SIZE = [512, 384];
 const dir = { UP: 0, DOWN: 1, LEFT: 2, RIGHT: 3 }
 
 const modes = {
-  TITLE: 0,
-  MENU: 1,
-  LEVEL: 2
+  LOGO: 0,
+  TITLE: 1,
+  SELECT: 2,
+  LEVEL: 3,
+  PASSED: 4,
+  FAILED: 5
 }
 
 const sprites = {
@@ -16,11 +19,17 @@ const sprites = {
   RAT: [2, 1],
   DEVIL: [4, 1],
   WALL: [0, 0],
-  KILL: [2, 0]
+  KILL: [2, 0],
+  GRADE_A: [0, 2],
+  GRADE_B: [2, 2],
+  GRADE_C: [4, 2],
+  GRADE_D: [6, 2],
+  GRADE_F: [8, 2]
 }
 
 const pictures = {
-  PASSED: [0, 0]
+  PASSED: [0, 0],
+  ZAID: [0, 3]
 }
 
 const types = {

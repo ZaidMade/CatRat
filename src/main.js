@@ -1,7 +1,7 @@
 var title;
 var canvas, context;
 
-var mode = modes.LEVEL;
+var mode = modes.LOGO;
 
 var tiles = [null, false];  // Tiles image, loaded flag
 var pics = [null, false];   // Full size images, loaded flag
@@ -39,34 +39,34 @@ $(function(){
 
   loadGraphics();
   loadLevel(tmp_level.data);
-  main();
 });
 
 // Handle keyboard input
 $(document).on("keypress", function(e){
+  switch(mode){
+    case modes.LEVEL:
+      // Reset the level - R
+      if(e.which == 114){ clearLevel(); loadLevel(tmp_level.data); }
 
-  if(mode == modes.LEVEL){
-    if(e.which == 101){ clearLevel(); } // E
-
-    // Reset the level
-    if(e.which == 114){  // R
-      clearLevel();
-      loadLevel(tmp_level.data);
-    }
-
-    // WASD movement
-    if(e.which == 119){ moveCatNRat(dir.UP); }    // W
-    if(e.which ==  97){ moveCatNRat(dir.LEFT); }  // A
-    if(e.which == 115){ moveCatNRat(dir.DOWN); }  // S
-    if(e.which == 100){ moveCatNRat(dir.RIGHT); } // D
-
-    draw();
+      // WASD movement
+      if(e.which == 119){ moveCatNRat(dir.UP); }    // W
+      if(e.which ==  97){ moveCatNRat(dir.LEFT); }  // A
+      if(e.which == 115){ moveCatNRat(dir.DOWN); }  // S
+      if(e.which == 100){ moveCatNRat(dir.RIGHT); } // D
+      break;
+    case modes.LOGO:
+      mode = modes.LEVEL;
+      break;
   }
 
+  draw();
 });
 
-function main(){
-
+function drawText(_text, _x, _y, _align = "left", _color = "white"){
+  _text = _text.split("").join(String.fromCharCode(8201));
+  context.fillStyle = _color;
+  context.textAlign = _align;
+  context.fillText(_text, _x, _y);
 }
 
 function draw(){
@@ -86,8 +86,11 @@ function draw(){
     case modes.LEVEL:
       drawLevel();
       break;
-    case modes.TITLE:
-      drawTitle();
+    case modes.LOGO:
+      drawLogo();
+      break;
+    case modes.PASSED:
+      drawPassed();
       break;
   }
 }

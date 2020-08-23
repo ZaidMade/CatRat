@@ -47,12 +47,15 @@ function moveCatNRat(_dir){
 
   // Check if the level was just passed
   if(
-    (tCat.x == rat.x && tCat.y == rat.y &&
-    tRat.x == cat.x && tRat.y == cat.y) ||
-    (tCat.x == tRat.x && tCat.y == tRat.y)
+    /* Make sure they can run into each other... */
+    ((!halt[0] || !halt[1]) && (!kill[0] && !kill[1])) &&
+    /* Then check if they're swapping positions... */
+    ((tCat.x == rat.x && tCat.y == rat.y && tRat.x == cat.x && tRat.y == cat.y) ||
+    /* OR if they're moving into the same cell... */
+    (tCat.x == tRat.x && tCat.y == tRat.y))
   ){
     // LEVEL PASSED!!
-    mode = modes.TITLE;
+    mode = modes.PASSED;
     clearLevel();
     return;
   }
