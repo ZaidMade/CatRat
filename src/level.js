@@ -15,6 +15,7 @@ function clearLevel(){
 
 function loadLevel(_dat = []){
   moveCounter = 0;
+  mode = modes.LEVEL;
 
   var posIter = [0, 0];
   for(var i = 0; i < _dat.length; i++){
@@ -70,7 +71,6 @@ function drawLevel(){
 // Draw the level passed screen
 function drawPassed(){
   if(!pics[1]){ return; }
-
   var pic = pictures.PASSED;
 
   // Detemine the grade
@@ -91,7 +91,7 @@ function drawPassed(){
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
 
-  if(drawBop){ drawText("[press a key]", 310, 300, "left", "#bbb"); }
+  if(drawBop){ drawText("[press a key]", 310, 300, "left"); }
 
   drawText("Moves: " + String(moveCounter) + "/" + String(tmp_level.par), 310, 190);
   drawText("Grade:", 310, 240);
@@ -103,4 +103,23 @@ function drawPassed(){
     gradeX*TILE_SIZE, grade[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
     390, 220, TILE_SIZE, TILE_SIZE
   );
+}
+
+// Draw the level failed screen
+function drawFailed(){
+  if(!pics[1]){ return; }
+  var pic = pictures.FAILED;
+
+  // Select the alternate picture when 2nd image flag is raised
+  var picX = pic[0];
+  if(drawBop){ picX++; }
+
+  // Draw the picture for the title
+  context.drawImage(pics[0],
+    picX*CANVAS_SIZE[0], pic[1]*CANVAS_SIZE[1], CANVAS_SIZE[0], CANVAS_SIZE[1],
+    0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
+  );
+
+  if(drawBop){ drawText("[Press R to Restart]", 370, 290, "center"); }
+  else{ drawText("[Press E to Quit]", 365, 320, "center"); }
 }

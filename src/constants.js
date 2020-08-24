@@ -29,6 +29,7 @@ const sprites = {
 
 const pictures = {
   PASSED: [0, 0],
+  FAILED: [0, 1],
   ZAID: [0, 3]
 }
 

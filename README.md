@@ -18,7 +18,7 @@ A game I'm making for no reason.
 * [ ] __Title__: The title screen. Just to be cute and so you know what game you're playing.
 * [ ] __Level Select__: Allows you to select a level to play. Shows you what levels are locked and passed and what grade you got on the passed levels.
 * [X] __Passed__: A cute screen for when you pass a level and what grade you got on it.
-* [ ] __Failed__: Another cute screen for when you failed a level encouraging the player to try again.
+* [X] __Failed__: Another cute screen for when you failed a level encouraging the player to try again.
 * [ ] __Winner__: A third cute screen for when you've won the game.
 
 ### Dependencies

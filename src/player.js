@@ -68,6 +68,9 @@ function moveCatNRat(_dir){
   if(!halt[0] || !halt[1]){ moveCounter++; }
 
   // Kill the cat and rat
-  if(kill[0]){ cat = undefined; console.log("GAME OVER! CAT DIED T_T"); }
-  if(kill[1]){ rat = undefined; console.log("GAME OVER! RAT DIED Y_Y"); }
+  if(kill[0] || kill[1]){
+    cat = undefined;
+    rat = undefined;
+    mode = modes.FAILED;
+  }
 }

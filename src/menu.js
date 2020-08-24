@@ -9,5 +9,5 @@ function drawLogo(){
   );
 
   drawText("More @ http://zaid.games", 256, 310, "center");
-  if(drawBop){drawText("[press a key]", 256, 350, "center", "#bbb");}
+  if(drawBop){drawText("[press a key]", 256, 350, "center");}
 }
