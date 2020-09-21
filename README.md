@@ -20,6 +20,7 @@ A game I'm making for no reason.
 * [X] __Passed__: A cute screen for when you pass a level and what grade you got on it.
 * [X] __Failed__: Another cute screen for when you failed a level encouraging the player to try again.
 * [ ] __Winner__: A third cute screen for when you've won the game.
+* [ ] __Editor__: A place to make levels for the game.
 
 ### Dependencies
 * JQuery 3.5.1
