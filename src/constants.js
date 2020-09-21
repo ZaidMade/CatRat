@@ -11,7 +11,8 @@ const modes = {
   SELECT: 2,
   LEVEL: 3,
   PASSED: 4,
-  FAILED: 5
+  FAILED: 5,
+  EDITOR: 6
 }
 
 const sprites = {
@@ -32,6 +33,8 @@ const pictures = {
   FAILED: [0, 1],
   ZAID: [0, 3]
 }
+
+const type_list = ["CAT", "RAT", "DEVIL", "WALL", "KILL"];
 
 const types = {
   EMPTY: 0,

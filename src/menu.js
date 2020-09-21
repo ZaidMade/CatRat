@@ -8,6 +8,5 @@ function drawLogo(){
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
 
-  drawText("More @ http://zaid.games", 256, 310, "center");
-  if(drawBop){drawText("[press a key]", 256, 350, "center");}
+  if(drawBop){drawText("More @ http://zaid.games", 256, 300, "center")};
 }

@@ -18,6 +18,17 @@ function loadGraphics(){
   pics[0].onload = function(){ pics[1] = true; draw(); }
 }
 
+function init(){
+  loadGraphics();
+  loadLevel(tmp_level.data);
+
+  if(mode == modes.LOGO)
+    makeButton(256, 345, "Click to Start", function(){
+      mode = modes.LEVEL;
+      this.destroy();
+    });
+}
+
 // Initialize the game on document load.
 $(function(){
   title = document.getElementById("title")
@@ -26,10 +37,16 @@ $(function(){
   context.font = "bold 14px sans-serif";
   requestAnimationFrame(draw);
 
+  canvas.oncontextmenu = function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    handleClick(false);
+  }
+
   // Do the sprite bop
   setInterval(function(){
     drawBop = !drawBop;
-    if(mode == modes.LEVEL){
+    if(mode == modes.LEVEL || mode == modes.EDITOR){
       for(var i = 0; i < entities.length; i++){
         entities[i].bop = !entities[i].bop
       }
@@ -37,12 +54,12 @@ $(function(){
     draw();
   }, 500);
 
-  loadGraphics();
-  loadLevel(tmp_level.data);
+  init();
 });
 
 function drawText(_text, _x, _y, _align = "left", _color = "white"){
   _text = _text.split("").join(String.fromCharCode(8201));
+  context.font = "bold 16px sans-serif";
   context.fillStyle = _color;
   context.textAlign = _align;
   context.fillText(_text, _x, _y);
@@ -74,5 +91,12 @@ function draw(){
     case modes.FAILED:
       drawFailed();
       break;
+    case modes.EDITOR:
+      drawEditor();
+      break;
+  }
+
+  for(var i = 0; i < buttons.length; i++){
+    buttons[i].draw();
   }
 }

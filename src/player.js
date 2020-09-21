@@ -55,8 +55,14 @@ function moveCatNRat(_dir){
     (tCat.x == tRat.x && tCat.y == tRat.y))
   ){
     // LEVEL PASSED!!
-    mode = modes.PASSED;
     clearLevel();
+    mode = modes.PASSED;
+    makeButton(375, 300, "Continue", function(){
+      mode = modes.LOGO;
+      clearButtons();
+      init();
+    });
+
     return;
   }
 
@@ -72,5 +78,15 @@ function moveCatNRat(_dir){
     cat = undefined;
     rat = undefined;
     mode = modes.FAILED;
+
+    makeButton(370, 255, "Retry Level", function(){
+      clearLevel();
+      loadLevel(tmp_level.data);
+      mode = modes.LEVEL;
+      clearButtons();
+    });
+
+    makeButton(370, 310, "Give Up T_T");
+
   }
 }

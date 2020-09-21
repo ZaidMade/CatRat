@@ -10,6 +10,7 @@
   <script src="src/objects.js"></script>
   <script src="src/menu.js"></script>
   <script src="src/level.js"></script>
+  <script src="src/editor.js"></script>
   <script src="src/player.js"></script>
   <script src="src/input.js"></script>
   <script src="src/main.js"></script>
@@ -20,6 +21,10 @@ h1{
   color #fff;
   letter-spacing: 2px;
 }
+
+/*canvas{
+  cursor: none;
+}*/
 </style>
 
 </head>
@@ -27,7 +32,7 @@ h1{
   <!-- Game Window -->
   <div align="center" style="margin-top: 150px;">
     <canvas id="game" width="512" height="384"></canvas>
-    <h1 id="title" style="color: #fff;">Cat-N-Rat</h1>
+    <textarea id="game-io" style="position: absolute; visibility: hidden;"></textarea>
   </div>
 </body>
 </html>

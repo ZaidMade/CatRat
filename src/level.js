@@ -15,7 +15,6 @@ function clearLevel(){
 
 function loadLevel(_dat = []){
   moveCounter = 0;
-  mode = modes.LEVEL;
 
   var posIter = [0, 0];
   for(var i = 0; i < _dat.length; i++){
@@ -64,7 +63,8 @@ function drawLevel(){
       e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
     );
 
-    drawText(String(moveCounter), 10, 15);
+    if(mode == modes.LEVEL)
+      drawText(String(moveCounter), 10, 15);
   }
 }
 
@@ -90,8 +90,6 @@ function drawPassed(){
     picX*CANVAS_SIZE[0], pic[1]*CANVAS_SIZE[1], CANVAS_SIZE[0], CANVAS_SIZE[1],
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
-
-  if(drawBop){ drawText("[press a key]", 310, 300, "left"); }
 
   drawText("Moves: " + String(moveCounter) + "/" + String(tmp_level.par), 310, 190);
   drawText("Grade:", 310, 240);
@@ -119,7 +117,4 @@ function drawFailed(){
     picX*CANVAS_SIZE[0], pic[1]*CANVAS_SIZE[1], CANVAS_SIZE[0], CANVAS_SIZE[1],
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
-
-  if(drawBop){ drawText("[Press R to Restart]", 370, 290, "center"); }
-  else{ drawText("[Press E to Quit]", 365, 320, "center"); }
 }
