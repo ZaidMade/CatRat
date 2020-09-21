@@ -1,7 +1,7 @@
-var title;
+var title, io;
 var canvas, context;
 
-var mode = modes.LOGO;
+var mode = modes.EDITOR;
 
 var tiles = [null, false];  // Tiles image, loaded flag
 var pics = [null, false];   // Full size images, loaded flag
@@ -31,7 +31,8 @@ function init(){
 
 // Initialize the game on document load.
 $(function(){
-  title = document.getElementById("title")
+  title = document.getElementById("title");
+  io = document.getElementById("game-io");
   canvas = document.getElementById("game");
   context = canvas.getContext("2d");
   context.font = "bold 14px sans-serif";

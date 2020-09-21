@@ -29,10 +29,17 @@ h1{
 
 </head>
 <body style="background-color: #2C2F33;">
-  <!-- Game Window -->
-  <div align="center" style="margin-top: 150px;">
+  <div align="center" style="margin-top: 125px;">
+    <!-- Game Window -->
     <canvas id="game" width="512" height="384"></canvas>
-    <textarea id="game-io" style="position: absolute; visibility: hidden;"></textarea>
+    <!-- Game I/O -->
+    <div id="game-io" style="display: none;">
+      <textarea style="resize: none; width: 450px; height: 32px;"></textarea>
+      <a href="#io" style="display: inline-block; margin-left: 10px;">
+        <img src="img/check.gif" id="game-io-check">
+        <img src="img/clipboard.gif" id="game-io-clipboard" style="display: none;">
+      </a>
+    </div>
   </div>
 </body>
 </html>

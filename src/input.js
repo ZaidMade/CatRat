@@ -49,9 +49,12 @@ $(document).on("keypress", function(e){
         if(cursor >= type_list.length - 1){ cursor = 0; }
         else{ cursor++; }
       }
-      if(e.which == 115){
+      if(e.which == 115){ // S
         if(cursor <= 0){ cursor = type_list.length - 1; }
         else{ cursor--; }
+      }
+      if(e.which == 112){ // P
+        mode = modes.LEVEL;
       }
   }
 

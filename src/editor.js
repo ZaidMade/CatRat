@@ -81,3 +81,7 @@ function drawEditor(){
     e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
   );
 }
+
+function exportLevel(){
+  $("#game-io").css('display', 'block');
+}
