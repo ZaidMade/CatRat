@@ -41,7 +41,7 @@ $(function(){
   canvas.oncontextmenu = function(e){
     e.preventDefault();
     e.stopPropagation();
-    handleClick(false);
+    editorHandleClick(false);
   }
 
   // Do the sprite bop

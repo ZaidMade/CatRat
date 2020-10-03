@@ -8,6 +8,7 @@ function makeButton(_x, _y, _text, _callback = function(){}){
 function clearButtons(){ buttons = []; }
 
 var mousePos;
+var acceptInput = true;
 
 function getMousePos(evt) {
   var rect = canvas.getBoundingClientRect();
@@ -29,14 +30,31 @@ function getMousePos(evt) {
 
 $(function(){
   document.addEventListener('mousemove', getMousePos);
+
+  $("#game-io a").click( function(e){
+    e.preventDefault();
+    $("#game-io textarea").val("");
+    $("#game-io").css('display', 'none');
+    acceptInput = true;
+  });
 });
 
 // Handle keyboard input
 $(document).on("keypress", function(e){
+  if(!acceptInput)
+    return;
+
   switch(mode){
     case modes.LEVEL:
       // Reset the level - R
       if(e.which == 114){ clearLevel(); loadLevel(tmp_level.data); }
+      // Go back to editor - P
+      if(e.which == 112 && fromEditor){
+        fromEditor = false;
+        clearLevel();
+        loadLevel();
+        mode = modes.EDITOR;
+      }
 
       // WASD movement
       if(e.which == 119){ moveCatNRat(dir.UP); }    // W
@@ -54,14 +72,23 @@ $(document).on("keypress", function(e){
         else{ cursor--; }
       }
       if(e.which == 112){ // P
+        fromEditor = true;
+        levelData = levelWriteOut();
         mode = modes.LEVEL;
       }
+      if(e.which == 111){ // O
+        exportLevel();
+      }
+      break;
   }
 
   draw();
 });
 
 $(document).on("click", function(e){
+  if(!acceptInput)
+    return;
+
   if(e.which == 1){                     // left click
     // Activate buttons if pressed
     for(var i = 0; i < buttons.length; i++){

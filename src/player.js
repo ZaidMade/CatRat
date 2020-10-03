@@ -30,11 +30,31 @@ function moveCatNRat(_dir){
   for(var _i = 0; _i < entities.length; _i++){
     var e = entities[_i];
 
-
     switch(e.type){
       // Stop if going to move into a wall
       case types.WALL:
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
+        break;
+      // Push blocks if able to
+      case types.PUSH:
+        if(e.x == tCat.x && e.y == tCat.y){
+          var tPush = { x: e.x + (tCat.x - cat.x), y: e.y + (tCat.y - cat.y) };
+          for(var _i1 = 0; _i1 < entities.length; _i1++){
+            var e1 = entities[_i1];
+            if(e1.x == tPush.x && e1.y == tPush.y){
+              // Destroy the push block
+              if(e1.type == types.KILL){ entities.splice(_i, 1); break; }
+              // Block the push block
+              else{ halt[0] = true; break; }
+            }
+          }
+          // Move the push block
+          if(!halt[0]){
+            e.x = tPush.x;
+            e.y = tPush.y;
+          }
+        }
         if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
         break;
       // Fail the level if going to move into a kill block

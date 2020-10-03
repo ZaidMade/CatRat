@@ -1,5 +1,7 @@
 var cursor = 2;
 
+var level_title, level_goal;
+
 function clearPosition(x, y){
   for(var i = 0; i < entities.length; i++){
     var e = entities[i];
@@ -63,7 +65,7 @@ function editorHandleClick(left = true){
 function drawEditor(){
   drawLevel();
 
-  if(mousePos == undefined)
+  if(mousePos == undefined || !acceptInput)
     return;
 
   var sprite = eval("sprites." + type_list[cursor]);
@@ -82,6 +84,27 @@ function drawEditor(){
   );
 }
 
+function levelWriteOut(){
+  var lvl_dat = new Array(MAP_SIZE[0] * MAP_SIZE[1]).fill(0);
+  for(var i = 0; i < entities.length; i++){
+    var e = entities[i];
+    var en = e.x + (MAP_SIZE[0] * e.y);
+    lvl_dat[en] = e.type;
+  }
+  return lvl_dat;
+}
+
 function exportLevel(){
+  var lvl = {
+    title: ((level_title == undefined)?"":String(level_title)),
+    par: ((level_goal == undefined)?0:level_goal),
+    data: levelWriteOut()
+  };
+  var lvl_json = JSON.stringify(lvl);
+
+  $("#game-io textarea").val(lvl_json);
+  $("#game-io textarea").select();
+
   $("#game-io").css('display', 'block');
+  acceptInput = false;
 }

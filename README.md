@@ -7,7 +7,7 @@ A game I'm making for no reason.
 ### Mechanics
 * [X] __WALL__: Stops the cat and the rat from moving into the same cell as it.
 * [X] __KILL__: Kills the cat or the rat if one of them are in the same cell as it.
-* [ ] __PUSH__: A wall entity that can be pushed by the cat but not by the rat.
+* [X] __PUSH__: A wall entity that can be pushed by the cat but not by the rat.
 * [ ] __SWAP__: A cell which swaps the positions of the cat and the rat when touched by one of them.
 * [ ] __PORTAL__: Two linked entities that either the cat or the rat will warp to when touched.
 * [ ] __GATE&KEY__: A wall cell that is deleted when a linked key entity is brought to it.

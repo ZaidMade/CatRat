@@ -1,6 +1,8 @@
+var levelData;
 var entities = [];
 var cat, rat;
 
+var fromEditor = false;
 var moveCounter = 0;
 
 // Wrapper function to make entity loading a little easier
@@ -13,7 +15,15 @@ function clearLevel(){
   entities = [];
 }
 
-function loadLevel(_dat = []){
+function loadLevel(_dat = undefined){
+  if(_dat != undefined)
+    levelData = _dat;
+  else
+    _dat = levelData;
+
+  if(_dat == undefined)
+    return;
+
   moveCounter = 0;
 
   var posIter = [0, 0];
@@ -34,7 +44,7 @@ function loadLevel(_dat = []){
           t = 'EMPTY';
           break;
       }
-      makeEntity(posIter[0], posIter[1], t);
+      if(t != 'EMPTY'){ makeEntity(posIter[0], posIter[1], t); }
     }
 
     posIter[0]++;

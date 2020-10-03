@@ -21,6 +21,7 @@ const sprites = {
   DEVIL: [4, 1],
   WALL: [0, 0],
   KILL: [2, 0],
+  PUSH: [4, 0],
   GRADE_A: [0, 2],
   GRADE_B: [2, 2],
   GRADE_C: [4, 2],
@@ -34,7 +35,7 @@ const pictures = {
   ZAID: [0, 3]
 }
 
-const type_list = ["CAT", "RAT", "DEVIL", "WALL", "KILL"];
+const type_list = ["CAT", "RAT", "DEVIL", "WALL", "KILL", "PUSH"];
 
 const types = {
   EMPTY: 0,
