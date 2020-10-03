@@ -1,4 +1,4 @@
-var levelData;
+var activeLevel;
 var entities = [];
 var cat, rat;
 
@@ -17,12 +17,14 @@ function clearLevel(){
 
 function loadLevel(_dat = undefined){
   if(_dat != undefined)
-    levelData = _dat;
+    activeLevel = JSON.parse(String(_dat));
   else
-    _dat = levelData;
+    _dat = activeLevel;
 
   if(_dat == undefined)
     return;
+  else
+    _dat = activeLevel.data;
 
   moveCounter = 0;
 
@@ -34,15 +36,10 @@ function loadLevel(_dat = undefined){
     else if(t == types.RAT){ rat = makeEntity(posIter[0], posIter[1], 'RAT'); }
     else{
       switch(t){
-        case types.WALL:
-          t = 'WALL';
-          break;
-        case types.KILL:
-          t = 'KILL';
-          break;
-        default:
-          t = 'EMPTY';
-          break;
+        case types.WALL: t = 'WALL'; break;
+        case types.KILL: t = 'KILL'; break;
+        case types.PUSH: t = 'PUSH'; break;
+        default: t = 'EMPTY'; break;
       }
       if(t != 'EMPTY'){ makeEntity(posIter[0], posIter[1], t); }
     }
@@ -84,7 +81,7 @@ function drawPassed(){
   var pic = pictures.PASSED;
 
   // Detemine the grade
-  var grade = (tmp_level.par / moveCounter) * 100;
+  var grade = (activeLevel.par / moveCounter) * 100;
   if(grade >= 90){ grade = sprites.GRADE_A; }
   else if(grade >= 80){ grade = sprites.GRADE_B; }
   else if(grade >= 70){ grade = sprites.GRADE_C; }
@@ -101,7 +98,7 @@ function drawPassed(){
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
 
-  drawText("Moves: " + String(moveCounter) + "/" + String(tmp_level.par), 310, 190);
+  drawText("Moves: " + String(moveCounter) + "/" + String(activeLevel.par), 310, 190);
   drawText("Grade:", 310, 240);
 
   // Draw the grade

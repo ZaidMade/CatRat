@@ -1,7 +1,7 @@
 var title, io;
 var canvas, context;
 
-var mode = modes.EDITOR;
+var mode = modes.LOGO;
 
 var tiles = [null, false];  // Tiles image, loaded flag
 var pics = [null, false];   // Full size images, loaded flag
@@ -18,13 +18,31 @@ function loadGraphics(){
   pics[0].onload = function(){ pics[1] = true; draw(); }
 }
 
+function initTitle(){
+  makeButton(85, 275, "Editor", function(){
+    mode = modes.EDITOR;
+    buttons = [];
+  });
+  makeButton(256, 275, "Play", function(){
+    mode = modes.LEVEL;
+    buttons = [];
+  });
+  makeButton(425, 275, "How-To", function(){
+
+  });
+  makeButton(256, 345, "zaid.games", function(){
+     window.open('http://zaid.games/', '_blank');
+  });
+}
+
 function init(){
   loadGraphics();
-  loadLevel(tmp_level.data);
+  loadLevel(tmp_level);
 
   if(mode == modes.LOGO)
     makeButton(256, 345, "Click to Start", function(){
-      mode = modes.LEVEL;
+      mode = modes.TITLE;
+      initTitle();
       this.destroy();
     });
 }
@@ -85,6 +103,9 @@ function draw(){
       break;
     case modes.LOGO:
       drawLogo();
+      break;
+    case modes.TITLE:
+      drawTitle();
       break;
     case modes.PASSED:
       drawPassed();
