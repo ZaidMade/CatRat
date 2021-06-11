@@ -3,7 +3,6 @@ class Entity{
   constructor(_x, _y, _type){
     this.x = _x;
     this.y = _y;
-    this.type = eval('types.' + _type);
     this.type = types[_type];
     this.sprite = sprites[_type];
     this.bop = (Math.random() >= 0.5);
