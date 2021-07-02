@@ -62,6 +62,9 @@ function moveCatNRat(_dir){
         if(e.x == tCat.x && e.y == tCat.y){ kill[0] = true; }
         if(e.x == tRat.x && e.y == tRat.y){ kill[1] = true; }
         break;
+      // Fail the level if the rat falls into a trap
+      case types.TRAP:
+        if(e.x == tRat.x && e.y == tRat.y){ kill[1] = true; }
     }
   }
 
