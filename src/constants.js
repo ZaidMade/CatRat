@@ -27,7 +27,11 @@ const sprites = {
   GRADE_B: [2, 2],
   GRADE_C: [4, 2],
   GRADE_D: [6, 2],
-  GRADE_F: [8, 2]
+  GRADE_F: [8, 2],
+  HOLE_UP: [0, 3],
+  HOLE_RIGHT: [2, 3],
+  HOLE_DOWN: [4, 3],
+  HOLE_LEFT: [6, 3]
 }
 
 const pictures = {
@@ -37,7 +41,7 @@ const pictures = {
   ZAID: [0, 3]
 }
 
-const type_list = ["CAT", "RAT", "DEVIL", "WALL", "KILL", "PUSH", "TRAP"];
+const type_list = ["CAT", "RAT", "DEVIL", "WALL", "KILL", "PUSH", "TRAP", "HOLE_UP", "HOLE_RIGHT", "HOLE_DOWN", "HOLE_LEFT"];
 
 const types = {
   EMPTY: 0,
@@ -46,7 +50,12 @@ const types = {
   DEVIL: 3,
   WALL: 4,
   PUSH: 5,
-  KILL: 6
+  KILL: 6,
+  TRAP: 7,
+  HOLE_UP: 8,
+  HOLE_RIGHT: 9,
+  HOLE_DOWN: 10,
+  HOLE_LEFT: 11
 }
 
 const tmp_level = '{"title":"","par":1,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,1,0,5,0,0,0,0,0,5,0,0,0,2,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}';

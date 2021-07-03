@@ -53,12 +53,25 @@ function drawLevel(){
   // Validate that the tiles image has been loaded
   if(!tiles[1]){ return; }
 
+  var cat = -1;
+  var rat = -1;
+
   // Draw all entities
   for(var i = 0; i < entities.length; i++){
     var e = entities[i];
 
     // Skip empty tiles
     if(e.type == types.EMPTY){ continue; }
+
+    // Don't draw the cat or the rat until last
+    if(e.type == types.CAT){
+      cat = entities[i];
+      continue;
+    }
+    if(e.type == types.RAT){
+      rat = entities[i];
+      continue;
+    }
 
     // Select the alternate sprite when 2nd image flag is raised
     var eSpriteX = e.sprite[0];
@@ -69,10 +82,35 @@ function drawLevel(){
       eSpriteX*TILE_SIZE, e.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
       e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
     );
-
-    if(mode == modes.LEVEL)
-      drawText(String(moveCounter), 10, 15);
   }
+
+  if(rat != -1){
+    // Select the alternate sprite when 2nd image flag is raised
+    var eSpriteX = rat.sprite[0];
+    if(rat.bop){ eSpriteX++; };
+
+    // Draw the sprite at the entity position
+    context.drawImage(tiles[0],
+      eSpriteX*TILE_SIZE, rat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+      rat.x * TILE_SIZE, rat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
+    );
+  }
+
+  if(cat != -1){
+    // Select the alternate sprite when 2nd image flag is raised
+    var eSpriteX = cat.sprite[0];
+    if(cat.bop){ eSpriteX++; };
+
+    // Draw the sprite at the entity position
+    context.drawImage(tiles[0],
+      eSpriteX*TILE_SIZE, cat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+      cat.x * TILE_SIZE, cat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
+    );
+  }
+
+  if(mode == modes.LEVEL)
+    drawText(String(moveCounter), 10, 15);
+
 }
 
 // Draw the level passed screen

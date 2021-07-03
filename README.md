@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://github.com/ZaidMade/CatRat/raw/master/logo.gif" alt="CatRat" title="CatRat">
+</div>
+
 # Cat-N-Rat
 A game I'm making for no reason.
 
