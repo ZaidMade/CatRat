@@ -142,11 +142,6 @@ function drawLevel(){
       _cheeseX += 32;
       _cheeseBop = !_cheeseBop;
     }
-
-    if(inWall){
-      context.drawImage(tiles[0], 256 + ((_cheeseBop)?32:0), 32, 32, 32, 200, 200, 32, 32);
-    }
-
   }
 }
 
