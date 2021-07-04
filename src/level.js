@@ -44,10 +44,12 @@ function loadLevel(_dat = undefined){
         case types.KILL: t = 'KILL'; break;
         case types.PUSH: t = 'PUSH'; break;
         case types.TRAP: t = 'TRAP'; break;
-        case types.HOLE_UP: t = 'HOLE_UP'; break;
-        case types.HOLE_RIGHT: t = 'HOLE_RIGHT'; break;
-        case types.HOLE_DOWN: t = 'HOLE_DOWN'; break;
-        case types.HOLE_LEFT: t = 'HOLE_LEFT'; break;
+        case types.HOLE_UR: t = 'HOLE_UR'; break;
+        case types.HOLE_DR: t = 'HOLE_DR'; break;
+        case types.HOLE_DL: t = 'HOLE_DL'; break;
+        case types.HOLE_UL: t = 'HOLE_UL'; break;
+        case types.HOLE_V: t = 'HOLE_V'; break;
+        case types.HOLE_H: t = 'HOLE_H'; break;
         case types.CHEESE: t = 'CHEESE'; break;
         case types.GOAL: t = 'GOAL'; break;
         default: t = 'EMPTY'; break;
@@ -140,6 +142,11 @@ function drawLevel(){
       _cheeseX += 32;
       _cheeseBop = !_cheeseBop;
     }
+
+    if(inWall){
+      context.drawImage(tiles[0], 256 + ((_cheeseBop)?32:0), 32, 32, 32, 200, 200, 32, 32);
+    }
+
   }
 }
 

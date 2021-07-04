@@ -27,10 +27,12 @@ const sprites = {
   GRADE_C: [4, 2],
   GRADE_D: [6, 2],
   GRADE_F: [8, 2],
-  HOLE_UP: [0, 3],
-  HOLE_RIGHT: [2, 3],
-  HOLE_DOWN: [4, 3],
-  HOLE_LEFT: [6, 3],
+  HOLE_UR: [0, 3],
+  HOLE_DR: [2, 3],
+  HOLE_DL: [4, 3],
+  HOLE_UL: [6, 3],
+  HOLE_V: [2, 4],
+  HOLE_H: [4, 4],
   GOAL: [8, 3],
   CHEESE: [8, 0]
 }
@@ -49,10 +51,12 @@ const type_list = [
     "KILL",
     "PUSH",
     "TRAP",
-    "HOLE_UP",
-    "HOLE_RIGHT",
-    "HOLE_DOWN",
-    "HOLE_LEFT",
+    "HOLE_UR",
+    "HOLE_DR",
+    "HOLE_DL",
+    "HOLE_UL",
+    "HOLE_V",
+    "HOLE_H",
     "GOAL",
     "CHEESE"
 ];
@@ -65,12 +69,14 @@ const types = {
   PUSH: 4,
   KILL: 5,
   TRAP: 6,
-  HOLE_UP: 7,
-  HOLE_RIGHT: 8,
-  HOLE_DOWN: 9,
-  HOLE_LEFT: 10,
+  HOLE_UR: 7,
+  HOLE_DR: 8,
+  HOLE_DL: 9,
+  HOLE_UL: 10,
   GOAL: 11,
-  CHEESE: 12
+  CHEESE: 12,
+  HOLE_V: 13,
+  HOLE_H: 14
 }
 
 const tmp_level = '{"title":"","par":3,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,9,0,0,0,11,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}';

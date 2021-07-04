@@ -1,3 +1,5 @@
+var inWall = false;
+
 // Function to move the cat and the rat
 function moveCatNRat(_dir){
   // Check for Game Over
@@ -35,46 +37,105 @@ function moveCatNRat(_dir){
       // Stop if going to move into a wall
       case types.WALL:
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
-        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
-        break;
-
-      case types.HOLE_UP:
-        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         if(e.x == tRat.x && e.y == tRat.y){
-          if(e.x != rat.x || e.y != rat.y + 1){ halt[1] = true; }
-        }
-        else if(e.x == rat.x && e.y == rat.y){
-          if(e.x != tRat.x || e.y != tRat.y + 1){ halt[1] = true; }
+          if(inWall){ halt[1] = true; }
         }
         break;
 
-      case types.HOLE_RIGHT:
+      /* MOUSE HOLES */
+      case types.HOLE_UR: // Up-right
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         if(e.x == tRat.x && e.y == tRat.y){
-          if(e.x != rat.x - 1 || e.y != rat.y){ halt[1] = true; }
+          if(
+            (e.x != rat.x || e.y != rat.y + 1) &&
+            (e.x != rat.x - 1 || e.y != rat.y)
+          ){ halt[1] = true; }
         }
         else if(e.x == rat.x && e.y == rat.y){
-          if(e.x != tRat.x - 1 || e.y != tRat.y){ halt[1] = true; }
+          if(
+            (e.x != tRat.x || e.y != tRat.y + 1) &&
+            (e.x != tRat.x - 1 || e.y != tRat.y)
+          ){ halt[1] = true; }
         }
         break;
 
-      case types.HOLE_DOWN:
+      case types.HOLE_DR: // Down-right
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         if(e.x == tRat.x && e.y == tRat.y){
-          if(e.x != rat.x || e.y != rat.y - 1){ halt[1] = true; }
+          if(
+            (e.x != rat.x || e.y != rat.y - 1) &&
+            (e.x != rat.x - 1 || e.y != rat.y)
+          ){ halt[1] = true; }
         }
         else if(e.x == rat.x && e.y == rat.y){
-          if(e.x != tRat.x || e.y != tRat.y - 1){ halt[1] = true; }
+          if(
+            (e.x != tRat.x || e.y != tRat.y - 1) &&
+            (e.x != tRat.x - 1 || e.y != tRat.y)
+          ){ halt[1] = true; }
         }
         break;
 
-      case types.HOLE_LEFT:
+      case types.HOLE_DL: // Down-left
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         if(e.x == tRat.x && e.y == tRat.y){
-          if(e.x != rat.x + 1 || e.y != rat.y){ halt[1] = true; }
+          if(
+            (e.x != rat.x || e.y != rat.y - 1) &&
+            (e.x != rat.x + 1 || e.y != rat.y)
+          ){ halt[1] = true; }
         }
         else if(e.x == rat.x && e.y == rat.y){
-          if(e.x != tRat.x + 1 || e.y != tRat.y){ halt[1] = true; }
+          if(
+            (e.x != tRat.x || e.y != tRat.y - 1) &&
+            (e.x != tRat.x + 1 || e.y != tRat.y)
+          ){ halt[1] = true; }
+        }
+        break;
+
+      case types.HOLE_UL: // Up-left
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(
+            (e.x != rat.x || e.y != rat.y + 1) &&
+            (e.x != rat.x + 1 || e.y != rat.y)
+          ){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(
+            (e.x != tRat.x || e.y != tRat.y + 1) &&
+            (e.x != tRat.x + 1 || e.y != tRat.y)
+          ){ halt[1] = true; }
+        }
+        break;
+
+      case types.HOLE_V: // vertical
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(
+            (e.x != rat.x || e.y != rat.y + 1) &&
+            (e.x != rat.x || e.y != rat.y - 1)
+          ){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(
+            (e.x != tRat.x || e.y != tRat.y + 1) &&
+            (e.x != tRat.x || e.y != tRat.y - 1)
+          ){ halt[1] = true; }
+        }
+        break;
+
+      case types.HOLE_H: // horizontal
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(
+            (e.x != rat.x + 1 || e.y != rat.y) &&
+            (e.x != rat.x - 1 || e.y != rat.y)
+          ){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(
+            (e.x != tRat.x + 1 || e.y != tRat.y) &&
+            (e.x != tRat.x - 1 || e.y != tRat.y)
+          ){ halt[1] = true; }
         }
         break;
 
@@ -114,26 +175,31 @@ function moveCatNRat(_dir){
           score++;
           entities.splice(_i, 1);
         }
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         break;
       case types.GOAL:
-        if(e.x == tRat.x && e.y == tRat.y)
+        if(e.x == tRat.x && e.y == tRat.y && score)
           goal = true;
         break;
     }
   }
 
-  // Check if the level was just passed
   if(
-    /* Make sure they can run into each other... */
+    /// Make sure they can run into each other...
     ((!halt[0] || !halt[1]) && (!kill[0] && !kill[1])) &&
-    /* Then check if they're swapping positions... */
-    ((tCat.x == rat.x && tCat.y == rat.y && tRat.x == cat.x && tRat.y == cat.y) ||
-    /* OR if they're moving into the same cell... */
-    (tCat.x == tRat.x && tCat.y == tRat.y))
-  )
+    // Check if they're swapping positions...
+    (tCat.x == rat.x && tCat.y == rat.y && tRat.x == cat.x && tRat.y == cat.y)
+  ){
     kill[1] = true;
+  }
 
-  if(goal){
+  // Move the cat and rat
+  if(!halt[0]){ cat.x = tCat.x; cat.y = tCat.y; }
+  if(!halt[1]){ rat.x = tRat.x; rat.y = tRat.y; }
+
+  if(rat.x == cat.x && rat.y == cat.y){ kill[1] = true; }
+
+  if(goal && !kill[0] && !kill[1]){
     // LEVEL PASSED!!
     clearLevel();
     mode = modes.PASSED;
@@ -144,10 +210,6 @@ function moveCatNRat(_dir){
     });
     return;
   }
-
-  // Move the cat and rat
-  if(!halt[0]){ cat.x = tCat.x; cat.y = tCat.y; }
-  if(!halt[1]){ rat.x = tRat.x; rat.y = tRat.y; }
 
   // Add to the move counter
   if(!halt[0] || !halt[1]){ moveCounter++; }

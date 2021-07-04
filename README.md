@@ -10,7 +10,7 @@
 * [X] __KILL__: Kills the cat or the rat if one of them are in the same cell as it.
 * [X] __PUSH__: A wall entity that can be pushed by the cat but not by the rat.
 * [ ] __GATE&KEY__: A wall cell that is deleted when a linked key entity is brought to it.
-* [ ] __MOUSEHOLE__: A wall block with a small hole in it the rat can pass through but the cat cannot.
+* [X] __MOUSEHOLE__: A wall block with a small hole in it the rat can pass through but the cat cannot.
 * [X] __RATTRAP__: A trap which only kills the rat, not the cat. Can be set off by the cat to destroy it.
 * [X] __CHEESE__: Actual cheese blocks to collect.
 * [X] __SHIP__: The goal that Captain Squeakers will return to after stealing cheese.
