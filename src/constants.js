@@ -17,7 +17,9 @@ const modes = {
 
 const sprites = {
   CAT: [0, 1],
-  RAT: [2, 1],
+  RAT: [1, 1],
+  RAT_SLEEP: [2, 1],
+  ZZZ: [4, 1],
   WALL: [0, 0],
   KILL: [2, 0],
   PUSH: [4, 0],

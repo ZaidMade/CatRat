@@ -1,3 +1,5 @@
+var ratSleep = false;
+
 // Function to move the cat and the rat
 function moveCatNRat(_dir){
   // Check for Game Over
@@ -8,10 +10,10 @@ function moveCatNRat(_dir){
   var tRat = { x: rat.x, y: rat.y };
 
   // WASD movement (tRat always does opposite of tCat)
-  if(_dir == dir.UP){ tCat.y++; tRat.y--; }     // Move tCat up
-  if(_dir == dir.LEFT){ tCat.x++; tRat.x--; }   // Move tCat left
-  if(_dir == dir.DOWN){ tCat.y--; tRat.y++; }   // Move tCat down
-  if(_dir == dir.RIGHT){ tCat.x--; tRat.x++; }  // Move tCat right
+  if(_dir == dir.UP){ tCat.y--; if(!ratSleep){ tRat.y++; } }     // Move tCat up
+  if(_dir == dir.LEFT){ tCat.x--; if(!ratSleep){ tRat.x++; } }   // Move tCat left
+  if(_dir == dir.DOWN){ tCat.y++; if(!ratSleep){ tRat.y--; } }   // Move tCat down
+  if(_dir == dir.RIGHT){ tCat.x++; if(!ratSleep){ tRat.x--; } }  // Move tCat right
 
   // Wrap tCat & tRat around the map
   var pe = tCat;
@@ -170,6 +172,10 @@ function moveCatNRat(_dir){
         if(e.x == tRat.x && e.y == tRat.y){
           score++;
           entities.splice(_i, 1);
+          if(score >= activeLevel.par){
+            ratSleep = true;
+            rat.sprite = sprites.RAT_SLEEP;
+          }
         }
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         break;
@@ -186,14 +192,14 @@ function moveCatNRat(_dir){
     // Check if they're swapping positions...
     (tCat.x == rat.x && tCat.y == rat.y && tRat.x == cat.x && tRat.y == cat.y)
   ){
-    kill[1] = true;
+    goal = true;
   }
 
   // Move the cat and rat
   if(!halt[0]){ cat.x = tCat.x; cat.y = tCat.y; }
   if(!halt[1]){ rat.x = tRat.x; rat.y = tRat.y; }
 
-  if(rat.x == cat.x && rat.y == cat.y){ kill[1] = true; }
+  if(rat.x == cat.x && rat.y == cat.y){ goal = true; }
 
   if(goal && !kill[0] && !kill[1]){
     // LEVEL PASSED!!

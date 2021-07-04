@@ -19,6 +19,7 @@ function clearLevel(){
 
 function loadLevel(_dat = undefined){
   score = 0;
+  ratSleep = false;
 
   if(_dat != undefined)
     activeLevel = JSON.parse(String(_dat));
@@ -98,25 +99,23 @@ function drawLevel(){
   }
 
   if(rat != -1){
-    // Select the alternate sprite when 2nd image flag is raised
-    var eSpriteX = rat.sprite[0];
-    if(rat.bop){ eSpriteX++; };
-
     // Draw the sprite at the entity position
     context.drawImage(tiles[0],
-      eSpriteX*TILE_SIZE, rat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+      rat.sprite[0]*TILE_SIZE, rat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
       rat.x * TILE_SIZE, rat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
     );
+    if(ratSleep){
+      context.drawImage(tiles[0],
+        sprites.ZZZ[0]*TILE_SIZE + ((rat.bop)?32:0), sprites.ZZZ[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+        rat.x * TILE_SIZE, rat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
+      );
+    }
   }
 
   if(cat != -1){
-    // Select the alternate sprite when 2nd image flag is raised
-    var eSpriteX = cat.sprite[0];
-    if(cat.bop){ eSpriteX++; };
-
     // Draw the sprite at the entity position
     context.drawImage(tiles[0],
-      eSpriteX*TILE_SIZE, cat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
+      cat.sprite[0]*TILE_SIZE, cat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
       cat.x * TILE_SIZE, cat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
     );
   }
