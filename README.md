@@ -4,8 +4,6 @@
 
 *A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The grid is 16x12 cells large. You move the rat using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction of the rat. If the rat and cat are in the same cell, the cat will eat the rat. If Captain Squeakers dies, the level will be failed.*
 
----
-
 ## To Do
 ### Mechanics
 * [X] __WALL__: Stops the cat and the rat from moving into the same cell as it.
