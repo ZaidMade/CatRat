@@ -4,6 +4,9 @@
 
 *A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The grid is 16x12 cells large. You move the rat using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction of the rat. If the rat and cat are in the same cell, the cat will eat the rat. If Captain Squeakers dies, the level will be failed.*
 
+---
+
+## To Do
 ### Mechanics
 * [X] __WALL__: Stops the cat and the rat from moving into the same cell as it.
 * [X] __KILL__: Kills the cat or the rat if one of them are in the same cell as it.
@@ -23,6 +26,10 @@
 * [X] __Failed__: Another cute screen for when you failed a level encouraging the player to try again.
 * [ ] __Winner__: A third cute screen for when you've won the game.
 * [X] __Editor__: A place to make levels for the game.
+
+### Other
+* [ ] __Sound__: Add sound effects.
+* [ ] __Saving(???)__: Some way to save progress & share created levels.
 
 ### Dependencies
 * JQuery 3.5.1
