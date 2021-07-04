@@ -174,7 +174,7 @@ function moveCatNRat(_dir){
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         break;
       case types.GOAL:
-        if(e.x == tRat.x && e.y == tRat.y && score)
+        if(e.x == tRat.x && e.y == tRat.y && score >= activeLevel.par)
           goal = true;
         break;
     }

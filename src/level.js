@@ -150,8 +150,8 @@ function drawPassed(){
   if(!pics[1]){ return; }
   var pic = pictures.PASSED;
 
-  // Detemine the grade
-  var grade = (activeLevel.par / moveCounter) * 100;
+  // Determine the grade
+  var grade = (score / activeLevel.par) * 100;
   if(grade >= 90){ grade = sprites.GRADE_A; }
   else if(grade >= 80){ grade = sprites.GRADE_B; }
   else if(grade >= 70){ grade = sprites.GRADE_C; }
@@ -168,12 +168,17 @@ function drawPassed(){
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
 
-  drawText("Moves: " + String(moveCounter) + "/" + String(activeLevel.par), 310, 190);
+  //drawText("Moves: " + String(moveCounter) + "/" + String(activeLevel.par), 310, 190);
+
+  context.drawImage(tiles[0], 256 + ((drawBop)?32:0), 0, 32, 32, 310, 174, 32, 32);
+  drawText(String(score) + "/" + String(activeLevel.par), 350, 200);
+
   drawText("Grade:", 310, 240);
 
   // Draw the grade
   var gradeX = grade[0];
   if(drawBop){ gradeX++; }
+  context.drawImage(tiles[0], 192 + ((drawBop)?32:0), 32, 32, 32, 390, 220, 32, 32);
   context.drawImage(tiles[0],
     gradeX*TILE_SIZE, grade[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
     390, 220, TILE_SIZE, TILE_SIZE

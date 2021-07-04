@@ -2,7 +2,7 @@
   <img src="https://github.com/ZaidMade/CatRat/raw/master/logo.gif" alt="CatRat" title="CatRat">
 </div>
 
-*A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The grid is 16x12 cells large. You move the rat using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction of the rat. If the rat and cat are in the same cell, the cat will eat the rat. If Captain Squeakers dies, the level will be failed.*
+*A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The board is a grid 16x12 cells in size. You move Captain Squeakers using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction. If Captain Squeakers and the cat touch, the cat will eat the Captain. Captain Squeakers is a pacifist and will not fight back. If Captain Squeakers dies, the level will be failed.*
 
 ## To Do
 ### Mechanics 🛠
