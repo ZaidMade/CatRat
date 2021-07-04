@@ -34,7 +34,7 @@ function editorHandleClick(left = true){
   if(mode != modes.EDITOR || mousePos == undefined)
     return;
 
-  var e = { x: mousePos.x - (TILE_SIZE/2), y: mousePos.y - (TILE_SIZE/2) };
+  var e = { x: mousePos.x, y: mousePos.y };
   e.x = Math.floor(e.x / TILE_SIZE);
   e.y = Math.floor(e.y / TILE_SIZE);
 
@@ -69,7 +69,7 @@ function drawEditor(){
     return;
 
   var sprite = eval("sprites." + type_list[cursor]);
-  var e = { x: mousePos.x - (TILE_SIZE/2), y: mousePos.y - (TILE_SIZE/2) };
+  var e = { x: mousePos.x, y: mousePos.y };
 
   e.x = Math.floor(e.x / TILE_SIZE);
   e.y = Math.floor(e.y / TILE_SIZE);

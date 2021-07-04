@@ -2,7 +2,7 @@
   <img src="https://github.com/ZaidMade/CatRat/raw/master/logo.gif" alt="CatRat" title="CatRat">
 </div>
 
-*A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The grid is 16x12 cells large. You move the rat using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction of the rat. If the rat and cat are in the same cell, the cat will eat the rat. If Lieutenant Squeakers dies, the level will be failed.*
+*A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The grid is 16x12 cells large. You move the rat using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction of the rat. If the rat and cat are in the same cell, the cat will eat the rat. If Captain Squeakers dies, the level will be failed.*
 
 ### Mechanics
 * [X] __WALL__: Stops the cat and the rat from moving into the same cell as it.
@@ -11,7 +11,7 @@
 * [ ] __GATE&KEY__: A wall cell that is deleted when a linked key entity is brought to it.
 * [ ] __MOUSEHOLE__: A wall block with a small hole in it the rat can pass through but the cat cannot.
 * [X] __RATTRAP__: A trap which only kills the rat, not the cat. Can be set off by the cat to destroy it.
-* [ ] __CHEESE__: Actual cheese blocks to collect.
+* [X] __CHEESE__: Actual cheese blocks to collect.
 * [X] __SHIP__: The goal that Captain Squeakers will return to after stealing cheese.
 
 ### Screens

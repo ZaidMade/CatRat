@@ -2,6 +2,8 @@ var activeLevel;
 var entities = [];
 var cat, rat;
 
+var score = 0;
+
 var fromEditor = false;
 var moveCounter = 0;
 
@@ -16,6 +18,8 @@ function clearLevel(){
 }
 
 function loadLevel(_dat = undefined){
+  score = 0;
+
   if(_dat != undefined)
     activeLevel = JSON.parse(String(_dat));
   else
@@ -43,7 +47,9 @@ function loadLevel(_dat = undefined){
         case types.HOLE_UP: t = 'HOLE_UP'; break;
         case types.HOLE_RIGHT: t = 'HOLE_RIGHT'; break;
         case types.HOLE_DOWN: t = 'HOLE_DOWN'; break;
-        case types.HOLE_LEFT: t = 'HOLE_DOWN'; break;
+        case types.HOLE_LEFT: t = 'HOLE_LEFT'; break;
+        case types.CHEESE: t = 'CHEESE'; break;
+        case types.GOAL: t = 'GOAL'; break;
         default: t = 'EMPTY'; break;
       }
       if(t != 'EMPTY'){ makeEntity(posIter[0], posIter[1], t); }
@@ -113,9 +119,28 @@ function drawLevel(){
     );
   }
 
-  if(mode == modes.LEVEL)
-    drawText(String(moveCounter), 10, 15);
+  if(mode == modes.LEVEL){
+    var _cheeseX = 0;
+    var _cheeseBop = rat.bop;
 
+    for(var _i = 0; _i < score; _i++){
+      context.globalAlpha = 0.8;
+      context.drawImage(tiles[0], 0 + ((_cheeseBop)?32:0), 128, 32, 32, _cheeseX, 0, 32, 32);
+      context.globalAlpha = 1;
+      context.drawImage(tiles[0], 256 + ((_cheeseBop)?32:0), 0, 32, 32, _cheeseX, 0, 32, 32);
+      _cheeseX += 32;
+      _cheeseBop = !_cheeseBop;
+    }
+
+    for(var _i = 0; _i < activeLevel.par - score; _i++){
+      context.globalAlpha = 0.8;
+      context.drawImage(tiles[0], 0 + ((_cheeseBop)?32:0), 128, 32, 32, _cheeseX, 0, 32, 32);
+      context.globalAlpha = 1;
+      context.drawImage(tiles[0], 256 + ((_cheeseBop)?32:0), 32, 32, 32, _cheeseX, 0, 32, 32);
+      _cheeseX += 32;
+      _cheeseBop = !_cheeseBop;
+    }
+  }
 }
 
 // Draw the level passed screen

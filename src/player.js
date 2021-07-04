@@ -109,6 +109,12 @@ function moveCatNRat(_dir){
         if(e.x == tRat.x && e.y == tRat.y){ kill[1] = true; }
         if(e.x == tCat.x && e.y == tCat.y){ entities.splice(_i, 1); }
         break;
+      case types.CHEESE:
+        if(e.x == tRat.x && e.y == tRat.y){
+          score++;
+          entities.splice(_i, 1);
+        }
+        break;
       case types.GOAL:
         if(e.x == tRat.x && e.y == tRat.y)
           goal = true;

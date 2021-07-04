@@ -73,7 +73,7 @@ $(document).on("keypress", function(e){
       }
       if(e.which == 112){ // P
         fromEditor = true;
-        levelData = levelWriteOut();
+        activeLevel.data = levelWriteOut();
         mode = modes.LEVEL;
       }
       if(e.which == 111){ // O
