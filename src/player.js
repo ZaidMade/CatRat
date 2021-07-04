@@ -8,10 +8,10 @@ function moveCatNRat(_dir){
   var tRat = { x: rat.x, y: rat.y };
 
   // WASD movement (tRat always does opposite of tCat)
-  if(_dir == dir.UP){ tCat.y--; tRat.y++; }     // Move tCat up
-  if(_dir == dir.LEFT){ tCat.x--; tRat.x++; }   // Move tCat left
-  if(_dir == dir.DOWN){ tCat.y++; tRat.y--; }   // Move tCat down
-  if(_dir == dir.RIGHT){ tCat.x++; tRat.x--; }  // Move tCat right
+  if(_dir == dir.UP){ tCat.y++; tRat.y--; }     // Move tCat up
+  if(_dir == dir.LEFT){ tCat.x++; tRat.x--; }   // Move tCat left
+  if(_dir == dir.DOWN){ tCat.y--; tRat.y++; }   // Move tCat down
+  if(_dir == dir.RIGHT){ tCat.x--; tRat.x++; }  // Move tCat right
 
   // Wrap tCat & tRat around the map
   var pe = tCat;
@@ -27,6 +27,7 @@ function moveCatNRat(_dir){
   // Check the positions to move to against the entities list
   var halt = [false, false];  // Flag to stop them from moving [cat, rat]
   var kill = [false, false];  // Flag to kill them [cat, rat]
+  var goal = false;
   for(var _i = 0; _i < entities.length; _i++){
     var e = entities[_i];
 
@@ -36,6 +37,47 @@ function moveCatNRat(_dir){
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
         break;
+
+      case types.HOLE_UP:
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(e.x != rat.x || e.y != rat.y + 1){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(e.x != tRat.x || e.y != tRat.y + 1){ halt[1] = true; }
+        }
+        break;
+
+      case types.HOLE_RIGHT:
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(e.x != rat.x - 1 || e.y != rat.y){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(e.x != tRat.x - 1 || e.y != tRat.y){ halt[1] = true; }
+        }
+        break;
+
+      case types.HOLE_DOWN:
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(e.x != rat.x || e.y != rat.y - 1){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(e.x != tRat.x || e.y != tRat.y - 1){ halt[1] = true; }
+        }
+        break;
+
+      case types.HOLE_LEFT:
+        if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
+        if(e.x == tRat.x && e.y == tRat.y){
+          if(e.x != rat.x + 1 || e.y != rat.y){ halt[1] = true; }
+        }
+        else if(e.x == rat.x && e.y == rat.y){
+          if(e.x != tRat.x + 1 || e.y != tRat.y){ halt[1] = true; }
+        }
+        break;
+
       // Push blocks if able to
       case types.PUSH:
         if(e.x == tCat.x && e.y == tCat.y){
@@ -65,6 +107,12 @@ function moveCatNRat(_dir){
       // Fail the level if the rat falls into a trap
       case types.TRAP:
         if(e.x == tRat.x && e.y == tRat.y){ kill[1] = true; }
+        if(e.x == tCat.x && e.y == tCat.y){ entities.splice(_i, 1); }
+        break;
+      case types.GOAL:
+        if(e.x == tRat.x && e.y == tRat.y)
+          goal = true;
+        break;
     }
   }
 
@@ -76,7 +124,10 @@ function moveCatNRat(_dir){
     ((tCat.x == rat.x && tCat.y == rat.y && tRat.x == cat.x && tRat.y == cat.y) ||
     /* OR if they're moving into the same cell... */
     (tCat.x == tRat.x && tCat.y == tRat.y))
-  ){
+  )
+    kill[1] = true;
+
+  if(goal){
     // LEVEL PASSED!!
     clearLevel();
     mode = modes.PASSED;
@@ -85,7 +136,6 @@ function moveCatNRat(_dir){
       clearButtons();
       init();
     });
-
     return;
   }
 

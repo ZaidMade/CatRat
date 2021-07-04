@@ -2,20 +2,17 @@
   <img src="https://github.com/ZaidMade/CatRat/raw/master/logo.gif" alt="CatRat" title="CatRat">
 </div>
 
-A game I'm making for no reason.
-
-### Description
-*A turn and grid based maze game where you must feed the rat to the cat by getting them both on the same grid cell. The grid is 16x12 cells large. You move the cat using WASD controls in rogue-like turn based movement and the rat moves in the opposite direction of the cat. ~~In some levels there will be a devil which will seek out the closest animal (the cat or the rat) with a preference for the cat since it is larger, moving 1 cell per-turn. If the devil touches one of them, it will kill them.~~ If either the cat or the rat dies, the level will be failed.*
+*A turn and grid based maze game where you play as Captain Squeakers, a rodent space pirate traveling the galaxy to steal as much cheese as they can. The grid is 16x12 cells large. You move the rat using WASD controls in rogue-like turn based movement and the cat moves in the opposite direction of the rat. If the rat and cat are in the same cell, the cat will eat the rat. If Lieutenant Squeakers dies, the level will be failed.*
 
 ### Mechanics
 * [X] __WALL__: Stops the cat and the rat from moving into the same cell as it.
 * [X] __KILL__: Kills the cat or the rat if one of them are in the same cell as it.
 * [X] __PUSH__: A wall entity that can be pushed by the cat but not by the rat.
-* ~~[ ] __SWAP__: A cell which swaps the positions of the cat and the rat when touched by one of them.~~
-* ~~[ ] __PORTAL__: Two linked entities that either the cat or the rat will warp to when touched.~~
 * [ ] __GATE&KEY__: A wall cell that is deleted when a linked key entity is brought to it.
 * [ ] __MOUSEHOLE__: A wall block with a small hole in it the rat can pass through but the cat cannot.
-* [X] __RATTRAP__: A trap which only kills the rat, not the cat.
+* [X] __RATTRAP__: A trap which only kills the rat, not the cat. Can be set off by the cat to destroy it.
+* [ ] __CHEESE__: Actual cheese blocks to collect.
+* [X] __SHIP__: The goal that Captain Squeakers will return to after stealing cheese.
 
 ### Screens
 * [X] __Level__: The actual game. (Pause menu should be included here. Keep it to just exiting the level.)

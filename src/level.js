@@ -39,6 +39,11 @@ function loadLevel(_dat = undefined){
         case types.WALL: t = 'WALL'; break;
         case types.KILL: t = 'KILL'; break;
         case types.PUSH: t = 'PUSH'; break;
+        case types.TRAP: t = 'TRAP'; break;
+        case types.HOLE_UP: t = 'HOLE_UP'; break;
+        case types.HOLE_RIGHT: t = 'HOLE_RIGHT'; break;
+        case types.HOLE_DOWN: t = 'HOLE_DOWN'; break;
+        case types.HOLE_LEFT: t = 'HOLE_DOWN'; break;
         default: t = 'EMPTY'; break;
       }
       if(t != 'EMPTY'){ makeEntity(posIter[0], posIter[1], t); }
