@@ -29,7 +29,7 @@
 * [ ] __Sound__: Add sound effects.
 * [ ] __Saving(???)__: Some way to save progress & share created levels.
 
-##Known Bugs 🐞
+## Known Bugs 🐞
 * Screen wrapping does not work with mouse hole blocks. Position invalid for move. (Player.js:42->132)
 
 ## Dependencies
