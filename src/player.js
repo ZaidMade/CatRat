@@ -1,5 +1,3 @@
-var inWall = false;
-
 // Function to move the cat and the rat
 function moveCatNRat(_dir){
   // Check for Game Over
@@ -37,9 +35,7 @@ function moveCatNRat(_dir){
       // Stop if going to move into a wall
       case types.WALL:
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
-        if(e.x == tRat.x && e.y == tRat.y){
-          if(inWall){ halt[1] = true; }
-        }
+        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
         break;
 
       /* MOUSE HOLES */
