@@ -1,5 +1,3 @@
-var ratSleep = false;
-
 // Function to move the cat and the rat
 function moveCatNRat(_dir){
   // Check for Game Over
@@ -10,10 +8,10 @@ function moveCatNRat(_dir){
   var tRat = { x: rat.x, y: rat.y };
 
   // WASD movement (tRat always does opposite of tCat)
-  if(_dir == dir.UP){ tCat.y--; if(!ratSleep){ tRat.y++; } }     // Move tCat up
-  if(_dir == dir.LEFT){ tCat.x--; if(!ratSleep){ tRat.x++; } }   // Move tCat left
-  if(_dir == dir.DOWN){ tCat.y++; if(!ratSleep){ tRat.y--; } }   // Move tCat down
-  if(_dir == dir.RIGHT){ tCat.x++; if(!ratSleep){ tRat.x--; } }  // Move tCat right
+  if(_dir == dir.UP){ tCat.y--; if(!rat.asleep){ tRat.y++; } }     // Move tCat up
+  if(_dir == dir.LEFT){ tCat.x--; if(!rat.asleep){ tRat.x++; } }   // Move tCat left
+  if(_dir == dir.DOWN){ tCat.y++; if(!rat.asleep){ tRat.y--; } }   // Move tCat down
+  if(_dir == dir.RIGHT){ tCat.x++; if(!rat.asleep){ tRat.x--; } }  // Move tCat right
 
   // Wrap tCat & tRat around the map
   var pe = tCat;
@@ -140,21 +138,18 @@ function moveCatNRat(_dir){
       // Push blocks if able to
       case types.PUSH:
         if(e.x == tCat.x && e.y == tCat.y){
-          var tPush = { x: e.x + (tCat.x - cat.x), y: e.y + (tCat.y - cat.y) };
-          for(var _i1 = 0; _i1 < entities.length; _i1++){
-            var e1 = entities[_i1];
-            if(e1.x == tPush.x && e1.y == tPush.y){
-              // Destroy the push block
-              if(e1.type == types.KILL){ entities.splice(_i, 1); break; }
-              // Block the push block
-              else{ halt[0] = true; break; }
-            }
-          }
-          // Move the push block
-          if(!halt[0]){
-            e.x = tPush.x;
-            e.y = tPush.y;
-          }
+          var _m = e.move(tCat.x - cat.x, tCat.y - cat.y);
+          if(!_m.moved){ halt[0] = true; }
+          if(_m.delete){ entities.splice(_i, 1); }
+        }
+        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
+        break;
+      // Push blocks if able to
+      case types.YARN:
+        if(e.x == tCat.x && e.y == tCat.y){
+          var _m = e.move(tCat.x - cat.x, tCat.y - cat.y);
+          if(!_m.moved){ halt[0] = true; }
+          if(_m.delete){ entities.splice(_i, 1); }
         }
         if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
         break;
@@ -172,10 +167,7 @@ function moveCatNRat(_dir){
         if(e.x == tRat.x && e.y == tRat.y){
           score++;
           entities.splice(_i, 1);
-          if(score >= activeLevel.par){
-            ratSleep = true;
-            rat.sprite = sprites.RAT_SLEEP;
-          }
+          if(score >= activeLevel.par){ rat.sleep(); }
         }
         if(e.x == tCat.x && e.y == tCat.y){ halt[0] = true; }
         break;

@@ -9,7 +9,26 @@ var moveCounter = 0;
 
 // Wrapper function to make entity loading a little easier
 function makeEntity(_x, _y, _type){
-  return entities[entities.push(new Entity(_x, _y, _type)) - 1];
+  var e;
+  switch(_type){
+    case 'CAT':
+      e = new Cat(_x, _y);
+      break;
+    case 'RAT':
+      e = new Rat(_x, _y);
+      break;
+    case 'YARN':
+      e = new Yarn(_x, _y);
+      break;
+    case 'PUSH':
+      e = new Push(_x, _y, 'PUSH');
+      break;
+    default:
+      e = new Entity(_x, _y, _type);
+      break;
+  }
+
+  return entities[entities.push(e) - 1];
 };
 
 function clearLevel(){
@@ -53,6 +72,7 @@ function loadLevel(_dat = undefined){
         case types.HOLE_H: t = 'HOLE_H'; break;
         case types.CHEESE: t = 'CHEESE'; break;
         case types.GOAL: t = 'GOAL'; break;
+        case types.YARN: t = 'YARN'; break;
         default: t = 'EMPTY'; break;
       }
       if(t != 'EMPTY'){ makeEntity(posIter[0], posIter[1], t); }
@@ -78,48 +98,17 @@ function drawLevel(){
     if(e.type == types.EMPTY){ continue; }
 
     // Don't draw the cat or the rat until last
-    if(e.type == types.CAT){
-      cat = entities[i];
-      continue;
-    }
-    if(e.type == types.RAT){
-      rat = entities[i];
-      continue;
-    }
+    if(e.type == types.CAT){ cat = entities[i]; continue; }
+    if(e.type == types.RAT){ rat = entities[i]; continue; }
 
-    // Select the alternate sprite when 2nd image flag is raised
-    var eSpriteX = e.sprite[0];
-    if(e.bop){ eSpriteX++; };
-
-    // Draw the sprite at the entity position
-    context.drawImage(tiles[0],
-      eSpriteX*TILE_SIZE, e.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
-      e.x * TILE_SIZE, e.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
-    );
+    e.draw();
   }
 
-  if(rat != -1){
-    // Draw the sprite at the entity position
-    context.drawImage(tiles[0],
-      rat.sprite[0]*TILE_SIZE, rat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
-      rat.x * TILE_SIZE, rat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
-    );
-    if(ratSleep){
-      context.drawImage(tiles[0],
-        sprites.ZZZ[0]*TILE_SIZE + ((rat.bop)?32:0), sprites.ZZZ[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
-        rat.x * TILE_SIZE, rat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
-      );
-    }
-  }
+  // draw the rat and the cat
+  if(rat != -1){ rat.draw(); }
+  if(cat != -1){ cat.draw(); }
 
-  if(cat != -1){
-    // Draw the sprite at the entity position
-    context.drawImage(tiles[0],
-      cat.sprite[0]*TILE_SIZE, cat.sprite[1]*TILE_SIZE, TILE_SIZE, TILE_SIZE,
-      cat.x * TILE_SIZE, cat.y * TILE_SIZE, TILE_SIZE, TILE_SIZE
-    );
-  }
-
+  // Draw the cheese counter at the top-left of the screen
   if(mode == modes.LEVEL){
     var _cheeseX = 0;
     var _cheeseBop = rat.bop;
