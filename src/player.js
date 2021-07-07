@@ -200,7 +200,7 @@ function moveCatNRat(_dir){
     // LEVEL PASSED!!
     clearLevel();
     mode = modes.PASSED;
-    makeButton(375, 300, "Continue", function(){
+    makeButton(375, 325, "Continue", function(){
       mode = modes.LOGO;
       clearButtons();
       init();

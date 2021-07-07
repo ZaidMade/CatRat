@@ -80,6 +80,8 @@ class Push extends Entity{
           case types.KILL:
             _delete = true;
             break;
+          case types.TRAIL:
+            break;
           default:
             return { delete: _delete, moved: false };
         }
@@ -94,7 +96,7 @@ class Push extends Entity{
 }
 
 var _tids = 0;
-class Trail extends Push{
+class Trail extends Entity{
   constructor(_x, _y, _s, _lt){
     super(_x, _y, 'TRAIL');
     this.sprite = _s;
@@ -144,6 +146,7 @@ class Yarn extends Push{
     this.last_dir = dir.DOWN;
     this.moves = 3;
     this.last_trail = -1;
+    this.drop = true;
   }
 
   move(_dx, _dy){
@@ -156,19 +159,7 @@ class Yarn extends Push{
       else if(_dx < 0){ this.dir = dir.LEFT; }
       else            { this.dir = dir.UP; }
 
-      var _pickup = false;
-
-      for(var _i = 0; _i < entities.length; _i++){
-        var _e = entities[_i];
-        if(_e.x == this.x && _e.y == this.y && _e.type == types.TRAIL){
-          this.moves += 1;
-          entities.splice(_i, 1);
-          _pickup = true;
-          break;
-        }
-      }
-
-      if(!_pickup){
+      if(this.drop){
         var _s = sprites.TRAIL_V;
         var _x = this.x;
         var _y = this.y;
@@ -247,6 +238,30 @@ class Yarn extends Push{
         this.moves -= 1;
 
       }
+
+      if(!this.drop){ this.drop = true; }
+
+      for(var _i = 0; _i < entities.length; _i++){
+        var _e = entities[_i];
+        if(_e.x == this.x && _e.y == this.y && _e.type == types.TRAIL){
+          this.moves += 1;
+
+          // Break the reference chain to avoid invalid references.
+          for(var _ti = 0; _ti < entities.length; _ti++){
+            var _te = entities[_ti];
+            if(_te.type == types.TRAIL && _te.last_trail == this){
+              _te.last_trail = -1;
+              break;
+            }
+          }
+
+          entities.splice(_i, 1);
+          this.drop = false;
+          this.last_trail = -1;
+          break;
+        }
+      }
+
     }
 
     if(_r.delete && this.last_trail != -1){ this.last_trail.burn = true; }

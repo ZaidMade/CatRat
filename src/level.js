@@ -162,10 +162,10 @@ function drawPassed(){
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
 
-  //drawText("Moves: " + String(moveCounter) + "/" + String(activeLevel.par), 310, 190);
+  drawText("Steps: " + String(moveCounter), 310, 280);
 
-  context.drawImage(tiles[0], 256 + ((drawBop)?32:0), 0, 32, 32, 310, 174, 32, 32);
-  drawText(String(score) + "/" + String(activeLevel.par), 350, 200);
+  context.drawImage(tiles[0], 256 + ((drawBop)?32:0), 0, 32, 32, 310, 169, 32, 32);
+  drawText(String(score) + "/" + String(activeLevel.par), 350, 195);
 
   drawText("Grade:", 310, 240);
 
