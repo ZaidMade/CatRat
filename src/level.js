@@ -116,8 +116,10 @@ function drawLevel(){
 
     for(var _i = 0; _i < score; _i++){
       context.globalAlpha = 0.8;
+      context.filter = 'invert(1)';
       context.drawImage(tiles[0], 0 + ((_cheeseBop)?32:0), 128, 32, 32, _cheeseX, 0, 32, 32);
       context.globalAlpha = 1;
+      context.filter = 'invert(0)';
       context.drawImage(tiles[0], 256 + ((_cheeseBop)?32:0), 0, 32, 32, _cheeseX, 0, 32, 32);
       _cheeseX += 32;
       _cheeseBop = !_cheeseBop;
@@ -125,8 +127,10 @@ function drawLevel(){
 
     for(var _i = 0; _i < activeLevel.par - score; _i++){
       context.globalAlpha = 0.8;
+      context.filter = 'invert(1)';
       context.drawImage(tiles[0], 0 + ((_cheeseBop)?32:0), 128, 32, 32, _cheeseX, 0, 32, 32);
       context.globalAlpha = 1;
+      context.filter = 'invert(0)';
       context.drawImage(tiles[0], 256 + ((_cheeseBop)?32:0), 32, 32, 32, _cheeseX, 0, 32, 32);
       _cheeseX += 32;
       _cheeseBop = !_cheeseBop;
