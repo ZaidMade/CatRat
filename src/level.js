@@ -50,6 +50,7 @@ function loadLevel(_dat = undefined){
   else
     _dat = activeLevel.data;
 
+  activeLevel.par = Math.min(Math.max(activeLevel.par, 0), 16);;
   moveCounter = 0;
 
   var posIter = [0, 0];
