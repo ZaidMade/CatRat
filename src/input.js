@@ -57,10 +57,16 @@ $(document).on("keypress", function(e){
       }
 
       // WASD movement
-      if(e.which == 119){ moveCatNRat(dir.UP); }    // W
-      if(e.which ==  97){ moveCatNRat(dir.LEFT); }  // A
-      if(e.which == 115){ moveCatNRat(dir.DOWN); }  // S
-      if(e.which == 100){ moveCatNRat(dir.RIGHT); } // D
+      var _move = false;
+      if(e.which == 119){ moveCatNRat(dir.UP); _move = true; }    // W
+      if(e.which ==  97){ moveCatNRat(dir.LEFT); _move = true; }  // A
+      if(e.which == 115){ moveCatNRat(dir.DOWN); _move = true; }  // S
+      if(e.which == 100){ moveCatNRat(dir.RIGHT); _move = true; } // D
+      if(_move){
+        for(var _i = 0; _i < entities.length; _i++){ entities[_i].tick(); }
+        rat.tick();
+        cat.tick();
+      }
       break;
     case modes.EDITOR:
       if(e.which == 119){ // W

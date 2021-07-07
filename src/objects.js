@@ -8,6 +8,8 @@ class Entity{
     this.bop = (Math.random() >= 0.5);
   }
 
+  tick(){ /* do nothing... */ }
+
   draw(){
     context.drawImage(tiles[0],
       this.sprite[0]*TILE_SIZE + ((this.bop)?32:0), this.sprite[1]*TILE_SIZE,
@@ -91,11 +93,37 @@ class Push extends Entity{
 
 }
 
-
+var _tids = 0;
 class Trail extends Push{
-  constructor(_x, _y, _s){
+  constructor(_x, _y, _s, _lt){
     super(_x, _y, 'TRAIL');
     this.sprite = _s;
+    this.last_trail = _lt;
+    this.burn = false;
+    this.lit = false;
+    this.tid = _tids;
+    _tids += 1;
+  }
+
+  tick(){
+    if(this.type == types.KILL){
+      for(var _i = 0; _i < entities.length; _i++){
+        if(entities[_i].tid == this.tid){
+          entities.splice(_i, 1);
+        }
+      }
+    }
+
+    if(this.lit){
+      this.sprite = sprites.KILL;
+      this.type = types.KILL;
+      if(this.last_trail != -1){
+        this.last_trail.burn = true;
+        this.last_trail.lit = true;
+      }
+    }
+
+    if(this.burn){ this.lit = true; }
   }
 
   draw(){
@@ -115,6 +143,7 @@ class Yarn extends Push{
     this.dir = dir.DOWN;
     this.last_dir = dir.DOWN;
     this.moves = 3;
+    this.last_trail = -1;
   }
 
   move(_dx, _dy){
@@ -214,11 +243,13 @@ class Yarn extends Push{
             break;
         }
 
-        entities.push(new Trail(_x, _y, _s));
+        this.last_trail = entities[entities.push(new Trail(_x, _y, _s, this.last_trail)) - 1 ];
         this.moves -= 1;
 
       }
     }
+
+    if(_r.delete && this.last_trail != -1){ this.last_trail.burn = true; }
 
     if(this.moves < 0){ _r.delete = true; }
     return _r;
