@@ -73,6 +73,7 @@ function loadLevel(_dat = undefined){
         case types.CHEESE: t = 'CHEESE'; break;
         case types.GOAL: t = 'GOAL'; break;
         case types.YARN: t = 'YARN'; break;
+        case types.TRAIL: t = 'TRAIL'; break;
         default: t = 'EMPTY'; break;
       }
       if(t != 'EMPTY'){ makeEntity(posIter[0], posIter[1], t); }

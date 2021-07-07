@@ -153,6 +153,9 @@ function moveCatNRat(_dir){
         }
         if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
         break;
+      case types.TRAIL:
+        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
+        break;
       // Fail the level if going to move into a kill block
       case types.KILL:
         if(e.x == tCat.x && e.y == tCat.y){ kill[0] = true; }

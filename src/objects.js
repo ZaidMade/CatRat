@@ -91,8 +91,185 @@ class Push extends Entity{
 
 }
 
+
+class Trail extends Push{
+  constructor(_x, _y, _s){
+    super(_x, _y, 'TRAIL');
+    this.sprite = _s;
+  }
+
+  draw(){
+    context.drawImage(tiles[0],
+      this.sprite[0]*TILE_SIZE + ((drawBop)?32:0), this.sprite[1]*TILE_SIZE,
+      TILE_SIZE, TILE_SIZE,
+      this.x * TILE_SIZE, this.y * TILE_SIZE,
+      TILE_SIZE, TILE_SIZE
+    );
+  }
+}
+
 class Yarn extends Push{
-  constructor(_x, _y){ super(_x, _y, 'YARN'); }
+  constructor(_x, _y, _t = 'YARN'){
+    super(_x, _y, _t);
+
+    this.dir = dir.DOWN;
+    this.last_dir = dir.DOWN;
+    this.moves = 3;
+  }
+
+  move(_dx, _dy){
+    var _r = super.move(_dx, _dy);
+
+    if(_r.moved){
+      this.last_dir = this.dir;
+      if     (_dx > 0){ this.dir = dir.RIGHT; }
+      else if(_dy > 0){ this.dir = dir.DOWN; }
+      else if(_dx < 0){ this.dir = dir.LEFT; }
+      else            { this.dir = dir.UP; }
+
+      var _pickup = false;
+
+      for(var _i = 0; _i < entities.length; _i++){
+        var _e = entities[_i];
+        if(_e.x == this.x && _e.y == this.y && _e.type == types.TRAIL){
+          this.moves += 1;
+          entities.splice(_i, 1);
+          _pickup = true;
+          break;
+        }
+      }
+
+      if(!_pickup){
+        var _s = sprites.TRAIL_V;
+        var _x = this.x;
+        var _y = this.y;
+        switch(this.dir){
+          case dir.DOWN:
+            switch(this.last_dir){
+              case dir.DOWN:
+                _s = sprites.TRAIL_V;
+                break;
+              case dir.UP:
+                _s = sprites.TRAIL_V;
+                break;
+              case dir.LEFT:
+                _s = sprites.TRAIL_UR;
+                break;
+              case dir.RIGHT:
+                _s = sprites.TRAIL_UL;
+                break;
+            }
+            _y -= 1;
+            break;
+          case dir.UP:
+            switch(this.last_dir){
+              case dir.DOWN:
+                _s = sprites.TRAIL_V;
+                break;
+              case dir.UP:
+                _s = sprites.TRAIL_V;
+                break;
+              case dir.LEFT:
+                _s = sprites.TRAIL_DR;
+                break;
+              case dir.RIGHT:
+                _s = sprites.TRAIL_DL;
+                break;
+            }
+            _y += 1;
+            break;
+          case dir.LEFT:
+            switch(this.last_dir){
+              case dir.DOWN:
+                _s = sprites.TRAIL_DL;
+                break;
+              case dir.UP:
+                _s = sprites.TRAIL_UL;
+                break;
+              case dir.LEFT:
+                _s = sprites.TRAIL_H;
+                break;
+              case dir.RIGHT:
+                _s = sprites.TRAIL_H;
+                break;
+            }
+            _x += 1;
+            break;
+          case dir.RIGHT:
+            switch(this.last_dir){
+              case dir.DOWN:
+                _s = sprites.TRAIL_DR;
+                break;
+              case dir.UP:
+                _s = sprites.TRAIL_UR;
+                break;
+              case dir.LEFT:
+                _s = sprites.TRAIL_H;
+                break;
+              case dir.RIGHT:
+                _s = sprites.TRAIL_H;
+                break;
+            }
+            _x -= 1;
+            break;
+        }
+
+        entities.push(new Trail(_x, _y, _s));
+        this.moves -= 1;
+
+      }
+    }
+
+    if(this.moves < 0){ _r.delete = true; }
+    return _r;
+  }
+
+  draw(){
+    var _ts;
+    var _tx = this.x * TILE_SIZE;
+    var _ty = this.y * TILE_SIZE;
+    var _tw = TILE_SIZE;
+    var _th = TILE_SIZE;
+
+    if(this.dir >= dir.LEFT){
+      _ts = sprites.TRAIL_H;
+      _th = TILE_SIZE/2;
+    }
+    else{
+      _ts = sprites.TRAIL_V;
+      _tw = TILE_SIZE/2;
+    }
+
+    var _tsx = _ts[0];
+    var _tsy = _ts[1];
+
+    if(this.dir == dir.LEFT){
+      _tsx += 0.5;
+      _tx += TILE_SIZE/2;
+    }
+    else if(this.dir == dir.UP){
+      _tsy += 0.5;
+      _ty += TILE_SIZE/2;
+    }
+
+    context.drawImage(tiles[0],
+      _tsx*TILE_SIZE + ((this.bop)?TILE_SIZE:0), _tsy*TILE_SIZE,
+      _th, _tw,
+      _tx, _ty,
+      _th, _tw
+    );
+
+    super.draw();
+  }
+
+  /*
+   * The yarn ball can only move 3 times and lay down 3 paths before it
+   * disappears. If a yarn ball is pushed onto a path, that path is destroyed
+   * and the yarn ball gains another move. If the yarn ball is pushed into a
+   * fire, the fire will spread backwards down the path destroying all the
+   * remaining connected paths.
+   */
+
 }
 
 class Button{
