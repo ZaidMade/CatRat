@@ -80,6 +80,8 @@ class Push extends Entity{
           case types.KILL:
             _delete = true;
             break;
+          case types.TRAIL:
+            if(this.type == types.YARN){ break; }
           default:
             return { delete: _delete, moved: false };
         }
