@@ -37,7 +37,7 @@ function initTitle(){
 
 function init(){
   loadGraphics();
-  loadLevel(tmp_level);
+  loadLevel(levels[3]);
 
   if(mode == modes.LOGO)
     makeButton(256, 345, "Click to Start", function(){
