@@ -30,25 +30,27 @@ function initTitle(){
   makeButton(425, 275, "How-To", function(){
 
   });
-  makeButton(256, 345, "zaid.games", function(){
+  makeButton(256, 345, " Z A I D ", function(){
      window.open('http://zaid.games/', '_blank');
   });
 }
 
 function init(){
   loadGraphics();
-  loadLevel(levels[3]);
+  loadLevel(levels[4]);
 
   if(mode == modes.LOGO)
-    makeButton(256, 345, "Click to Start", function(){
+    makeButton(256, 325, "Click to Start", function(){
       mode = modes.TITLE;
       initTitle();
       this.destroy();
     });
+
+    initInput();
 }
 
 // Initialize the game on document load.
-$(function(){
+window.onload = function(){
   title = document.getElementById("title");
   io = document.getElementById("game-io");
   canvas = document.getElementById("game");
@@ -74,7 +76,7 @@ $(function(){
   }, 500);
 
   init();
-});
+};
 
 function drawText(_text, _x, _y, _align = "left", _color = "white"){
   _text = _text.split("").join(String.fromCharCode(8201));

@@ -217,14 +217,32 @@ function moveCatNRat(_dir){
     rat = undefined;
     mode = modes.FAILED;
 
-    makeButton(370, 255, "Retry Level", function(){
+    makeButton(370, 255, "Try Again", function(){
       clearLevel();
       loadLevel(tmp_level.data);
       mode = modes.LEVEL;
       clearButtons();
     });
 
-    makeButton(370, 310, "Give Up T_T");
+    if(fromEditor){
+      makeButton(370, 310, "Edit Level", function(){
+        fromEditor = false;
+        clearButtons();
+        clearLevel();
+        loadLevel();
+        mode = modes.EDITOR;
+      });
+    }
+    else{
+      makeButton(370, 310, "Exit", function(){
+        clearLevel();
+        loadLevel(tmp_level.data);
+        clearButtons();
+        mode = modes.TITLE;
+        initTitle();
+      });
+    }
+
 
   }
 }

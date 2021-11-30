@@ -13,11 +13,10 @@
 * [X] __MOUSEHOLE__: A wall block with a small hole in it the rat can pass through but the cat cannot.
 * [X] __RATTRAP__: A trap which only kills the rat, not the cat. Can be set off by the cat to destroy it.
 * [X] __CHEESE__: Cells which can be eaten by the rat but stop the cat. If the rat eats enough cheese, it will fall asleep.
-* [X] ~~__SHIP__: The goal that Captain Squeakers will return to after stealing cheese.~~
 
 ### Screens 📺
 * [X] __Level__: The actual game. (Pause menu should be included here. Keep it to just exiting the level.)
-* [X] __Logo__: My logo just to plug my own website because I need that __CLOUT__.
+* [X] __Logo__: Logo screen.
 * [X] __Title__: The title screen. Just to be cute and so you know what game you're playing.
 * [ ] __Level Select__: Allows you to select a level to play. Shows you what levels are locked and passed and what grade you got on the passed levels.
 * [X] __Passed__: A cute screen for when you pass a level and what grade you got on it.
@@ -31,6 +30,3 @@
 
 ## Known Bugs 🐞
 * Screen wrapping does not work with mouse hole blocks. Position invalid for move. (Player.js:42->132)
-
-## Dependencies
-* JQuery 3.5.1

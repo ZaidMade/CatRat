@@ -7,8 +7,6 @@ function drawLogo(){
     pic[0]*CANVAS_SIZE[0], pic[1]*CANVAS_SIZE[1], CANVAS_SIZE[0], CANVAS_SIZE[1],
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
-
-  if(drawBop){drawText("More @ http://zaid.games", 256, 300, "center")};
 }
 
 function drawTitle(){

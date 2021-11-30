@@ -3,6 +3,7 @@ var entities = [];
 var cat, rat;
 
 var score = 0;
+var paused = false;
 
 var fromEditor = false;
 var moveCounter = 0;
@@ -39,6 +40,7 @@ function clearLevel(){
 function loadLevel(_dat = undefined){
   score = 0;
   ratSleep = false;
+  paused = false;
 
   if(_dat != undefined)
     activeLevel = JSON.parse(String(_dat));
@@ -137,6 +139,17 @@ function drawLevel(){
       _cheeseBop = !_cheeseBop;
     }
   }
+
+  if(paused){
+    // Draw the black background
+    context.beginPath();
+    context.rect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "rgba(0, 0, 0, 0.8)";
+    context.fill();
+
+    drawTitle();
+  }
+
 }
 
 // Draw the level passed screen

@@ -31,7 +31,7 @@ function clearCatRat(forCat = true){
 }
 
 function editorHandleClick(left = true){
-  if(mode != modes.EDITOR || mousePos == undefined)
+  if(mode != modes.EDITOR || mousePos == undefined || paused)
     return;
 
   var e = { x: mousePos.x, y: mousePos.y };
@@ -102,9 +102,10 @@ function exportLevel(){
   };
   var lvl_json = JSON.stringify(lvl);
 
-  $("#game-io textarea").val(lvl_json);
-  $("#game-io textarea").select();
-
-  $("#game-io").css('display', 'block');
-  acceptInput = false;
+  var _gameio = document.getElementById("game-io");
+  var _giotext = _gameio.getElementsByTagName("textarea")[0];
+  _giotext.value = lvl_json;
+  _giotext.select();
+  _gameio.style.display = "block";
+  acceptInput = true;
 }
