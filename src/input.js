@@ -3,6 +3,7 @@ var buttons = [];
 function makeButton(_x, _y, _text, _callback = function(){}){
   var b = buttons[buttons.push(new Button(_x, _y, _text, _callback)) - 1];
   b.myIndex = buttons.length - 1;
+  return b;
 }
 
 function clearButtons(){ buttons = []; }
@@ -49,13 +50,11 @@ document.addEventListener("keydown", function(e){
     case modes.LEVEL:
 
       switch(e.key){
-        case 'r':
-        case 'R':
+        case 'r': case 'R':
           clearLevel();
           loadLevel(tmp_level.data);
           break;
-        case 'p':
-        case 'P':
+        case 'p': case 'P':
           if(fromEditor){
             fromEditor = false;
             clearLevel();
@@ -134,7 +133,6 @@ document.addEventListener("keydown", function(e){
       }
       break;
     case modes.EDITOR:
-
       switch(e.key){
         case 'w': case 'W':
           if(cursor >= type_list.length - 1){ cursor = 0; }
@@ -143,11 +141,6 @@ document.addEventListener("keydown", function(e){
         case 's': case 'S':
           if(cursor <= 0){ cursor = type_list.length - 1; }
           else{ cursor--; }
-          break;
-        case 'p': case 'P':
-          fromEditor = true;
-          activeLevel.data = levelWriteOut();
-          mode = modes.LEVEL;
           break;
         case 'o': case 'O':
           exportLevel();
@@ -159,8 +152,19 @@ document.addEventListener("keydown", function(e){
 
         if(paused){
           makeButton(250, 225, "Play Level", function(){
+            var _par = 0;
+            for(var _i = 0; _i < entities.length; _i++){
+              if(entities[_i].type == types.CHEESE)
+                _par++;
+            }
+
+            activeLevel = {
+              title: "",
+              par: _par,
+              data: levelWriteOut()
+            };
+
             fromEditor = true;
-            activeLevel.data = levelWriteOut();
             mode = modes.LEVEL;
             paused = false;
             clearButtons();
@@ -183,6 +187,12 @@ document.addEventListener("keydown", function(e){
       }
 
       break;
+    case modes.SELECT:
+      clearButtons();
+      mode = modes.TITLE;
+      initTitle();
+      break;
+
   }
 
   draw();

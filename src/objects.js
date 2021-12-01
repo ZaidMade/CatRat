@@ -326,10 +326,14 @@ class Button{
     this.text = _text;
     this.callback = _callback;
 
+    this.value = -1;
     this.myIndex = undefined;
     this.hover = false;
     this.halfWidth = context.measureText(_text).width;
     this.halfHeight = 16;
+
+    this.color = "white";
+    this.highlightColor = "#000";
 
     this.width = this.halfWidth*2;
     this.height = this.halfHeight*2;
@@ -350,8 +354,8 @@ class Button{
   }
 
   draw(){
-    context.strokeStyle = "white";
-    context.fillStyle = (this.hover)?"white":"black";
+    context.strokeStyle = this.color;
+    context.fillStyle = (this.hover)?this.color:this.highlightColor;
     context.lineWidth = 4;
 
     context.beginPath();
@@ -359,7 +363,7 @@ class Button{
     context.rect(this.left, this.top, this.width, this.height);
     context.stroke();
 
-    drawText(this.text, this.x, this.y + (this.height/8), "center", (this.hover)?"black":"white");
+    drawText(this.text, this.x, this.y + (this.height/8), "center", (this.hover)?this.highlightColor:this.color);
   }
 
 }

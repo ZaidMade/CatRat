@@ -201,9 +201,19 @@ function moveCatNRat(_dir){
     clearLevel();
     mode = modes.PASSED;
     makeButton(375, 325, "Continue", function(){
-      mode = modes.LOGO;
+      if(fromEditor){
+        fromEditor = false;
+        clearButtons();
+        clearLevel();
+        loadLevel();
+        mode = modes.EDITOR;
+        return;
+      }
+
+      clearLevel();
       clearButtons();
-      init();
+      initLevelMenu();
+      mode = modes.SELECT;
     });
     return;
   }

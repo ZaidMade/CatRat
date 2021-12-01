@@ -21,23 +21,24 @@ function loadGraphics(){
 function initTitle(){
   makeButton(85, 275, "Editor", function(){
     mode = modes.EDITOR;
-    buttons = [];
+    clearButtons();
   });
   makeButton(256, 275, "Play", function(){
-    mode = modes.LEVEL;
-    buttons = [];
+    clearButtons();
+    mode = modes.SELECT;
+    initLevelMenu();
   });
   makeButton(425, 275, "How-To", function(){
 
   });
-  makeButton(256, 345, " Z A I D ", function(){
+  var _zb = makeButton(256, 345, " Z A I D ", function(){
      window.open('http://zaid.games/', '_blank');
   });
+  _zb.color = "#6495ed";
 }
 
 function init(){
   loadGraphics();
-  loadLevel(levels[4]);
 
   if(mode == modes.LOGO)
     makeButton(256, 325, "Click to Start", function(){
@@ -78,9 +79,9 @@ window.onload = function(){
   init();
 };
 
-function drawText(_text, _x, _y, _align = "left", _color = "white"){
+function drawText(_text, _x, _y, _align = "left", _color = "white", _size = "16px"){
   _text = _text.split("").join(String.fromCharCode(8201));
-  context.font = "bold 16px sans-serif";
+  context.font = "bold " + String(_size) + " sans-serif";
   context.fillStyle = _color;
   context.textAlign = _align;
   context.fillText(_text, _x, _y);
@@ -96,7 +97,7 @@ function draw(){
   // Draw the black background
   context.beginPath();
   context.rect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = "black";
+  context.fillStyle = "#000";
   context.fill();
 
   switch(mode){
@@ -108,6 +109,9 @@ function draw(){
       break;
     case modes.TITLE:
       drawTitle();
+      break;
+    case modes.SELECT:
+      drawLevelMenu();
       break;
     case modes.PASSED:
       drawPassed();
