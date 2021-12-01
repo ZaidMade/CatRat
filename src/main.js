@@ -1,6 +1,7 @@
 var title, io;
 var canvas, context;
 
+const version = "v1.0 Alpha - 20211201";
 var mode = modes.LOGO;
 
 var tiles = [null, false];  // Tiles image, loaded flag

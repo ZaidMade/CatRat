@@ -18,6 +18,9 @@ function drawTitle(){
     (pic[0] + Number(drawBop))*CANVAS_SIZE[0], pic[1]*CANVAS_SIZE[1], CANVAS_SIZE[0], CANVAS_SIZE[1],
     0, 0, CANVAS_SIZE[0], CANVAS_SIZE[1]
   );
+
+  if(!paused)
+    drawText(version, 5, 380, "left", "white", "8px");
 }
 
 function _pad(n, s) {
@@ -164,7 +167,7 @@ function drawLevelMenu(){
     }
 
     // Draw the title
-    drawText(_title, 305, 64, "left", _color, "22px");
+    drawText(_title, 305, 64, "left", _color, "20px");
   }
 
 }
