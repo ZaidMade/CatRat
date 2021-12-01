@@ -41,7 +41,7 @@ function init(){
   loadGraphics();
 
   if(mode == modes.LOGO)
-    makeButton(256, 325, "Click to Start", function(){
+    makeButton(256, 325, "CLICK HERE", function(){
       mode = modes.TITLE;
       initTitle();
       this.destroy();

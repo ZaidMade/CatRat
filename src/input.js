@@ -118,8 +118,8 @@ document.addEventListener("keydown", function(e){
               clearLevel();
               loadLevel(tmp_level.data);
               clearButtons();
-              mode = modes.TITLE;
-              initTitle();
+              initLevelMenu();
+              mode = modes.SELECT;
             });
           }
         }
@@ -204,9 +204,9 @@ document.addEventListener("click", function(e){
 
   if(e.which == 1){                     // left click
     // Activate buttons if pressed
-    for(var i = 0; i < buttons.length; i++){
-      var b = buttons[i];
-      if(b.hover){ b.callback(); }
+    for(var _i = 0; _i < buttons.length; _i++){
+      var _b = buttons[_i];
+      if(_b.hover){ _b.callback(_b.active); }
     }
 
     editorHandleClick();

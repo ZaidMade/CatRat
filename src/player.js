@@ -4,14 +4,20 @@ function moveCatNRat(_dir){
   if(cat == undefined || rat == undefined){ return; }
 
   // Make temporary copies of the cat and rat positions for moving
-  var tCat = { x: cat.x, y: cat.y };
-  var tRat = { x: rat.x, y: rat.y };
+  var tCat = { x: cat.x, y: cat.y, mx: 0, my: 0 };
+  var tRat = { x: rat.x, y: rat.y, mx: 0, my: 0 };
 
   // WASD movement (tRat always does opposite of tCat)
   if(_dir == dir.UP){ tCat.y--; if(!rat.asleep){ tRat.y++; } }     // Move tCat up
   if(_dir == dir.LEFT){ tCat.x--; if(!rat.asleep){ tRat.x++; } }   // Move tCat left
   if(_dir == dir.DOWN){ tCat.y++; if(!rat.asleep){ tRat.y--; } }   // Move tCat down
   if(_dir == dir.RIGHT){ tCat.x++; if(!rat.asleep){ tRat.x--; } }  // Move tCat right
+
+  // Get the move vector
+  tCat.mx = tCat.x - cat.x;
+  tCat.my = tCat.y - cat.y;
+  tRat.mx = tRat.x - rat.x;
+  tRat.my = tRat.y - rat.y;
 
   // Wrap tCat & tRat around the map
   var pe = tCat;
@@ -138,7 +144,7 @@ function moveCatNRat(_dir){
       // Push blocks if able to
       case types.PUSH:
         if(e.x == tCat.x && e.y == tCat.y){
-          var _m = e.move(tCat.x - cat.x, tCat.y - cat.y);
+          var _m = e.move(tCat.mx, tCat.my);
           if(!_m.moved){ halt[0] = true; }
           if(_m.delete){ entities.splice(_i, 1); }
         }

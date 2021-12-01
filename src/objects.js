@@ -70,6 +70,19 @@ class Push extends Entity{
 
   move(_dx, _dy){
     var _push = { x: this.x + _dx, y: this.y + _dy };
+
+    // Screen wrap for x
+    if(_push.x < 0)
+      _push.x = MAP_SIZE[0] - 1;
+    else if(_push.x >= MAP_SIZE[0])
+      _push.x = 0;
+
+    // Screen wrap for y
+    if(_push.y < 0)
+      _push.y = MAP_SIZE[1] - 1;
+    else if(_push.y >= MAP_SIZE[1])
+      _push.y = 0;
+
     var _delete = false;
 
     for(var _i = 0; _i < entities.length; _i++){
@@ -326,6 +339,7 @@ class Button{
     this.text = _text;
     this.callback = _callback;
 
+    this.active = true;
     this.value = -1;
     this.myIndex = undefined;
     this.hover = false;
@@ -364,6 +378,15 @@ class Button{
     context.stroke();
 
     drawText(this.text, this.x, this.y + (this.height/8), "center", (this.hover)?this.highlightColor:this.color);
+
+    if(!this.active){
+      context.fillStyle = "rgba(0, 0, 0, 0.75)";
+      context.strokeStyle = "rgba(0, 0, 0, 0.75)";
+      context.beginPath();
+      context.fillRect(this.left, this.top, this.width, this.height);
+      context.rect(this.left, this.top, this.width, this.height);
+      context.stroke();
+    }
   }
 
 }

@@ -6,13 +6,13 @@
 
 ## To Do
 ### Mechanics 🛠 ✅
+* [X] __CHEESE__: Cells which can be eaten by the rat but stop the cat. If the rat eats enough cheese, it will fall asleep.
 * [X] __WALL__: Stops the cat and the rat from moving into the same cell as it.
 * [X] __KILL__: Kills the cat or the rat if one of them are in the same cell as it.
 * [X] __PUSH__: A wall entity that can be pushed by the cat but not by the rat.
-* [X] __YARN__: A yarn ball the cat can push but the rat cannot. The ball can only be pushed 3 times and each time it leaves a trail of yarn behind it which the rat cannot pass.
 * [X] __MOUSEHOLE__: A wall block with a small hole in it the rat can pass through but the cat cannot.
 * [X] __RATTRAP__: A trap which only kills the rat, not the cat. Can be set off by the cat to destroy it.
-* [X] __CHEESE__: Cells which can be eaten by the rat but stop the cat. If the rat eats enough cheese, it will fall asleep.
+* [X] __YARN__: A yarn ball the cat can push but the rat cannot. The ball can only be pushed 3 times and each time it leaves a trail of yarn behind it which the rat cannot pass.
 
 ### Screens 📺
 * [X] __Level__: The actual game. (Pause menu should be included here. Keep it to just exiting the level.)
@@ -29,4 +29,5 @@
 * [ ] __Saving(???)__: Some way to save progress & share created levels.
 
 ## Known Bugs 🐞
-* Screen wrapping does not work with mouse hole blocks. Position invalid for move. (Player.js:42->132)
+* Screen wrapping for mouse hole blocks (Player.js:42->132)
+* Screen wrapping for yarn
