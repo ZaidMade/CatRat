@@ -69,19 +69,19 @@ document.addEventListener("keydown", function(e){
 
       if(!paused){
         switch(e.key){
-          case 'w': case 'W':
+          case 'w': case 'W': case "Up": case "ArrowUp":
             moveCatNRat(dir.UP);
             _move = true;
             break;
-          case 'a': case 'A':
+          case 'a': case 'A': case "Left": case "ArrowLeft":
             moveCatNRat(dir.LEFT);
             _move = true;
             break;
-          case 's': case 'S':
+          case 's': case 'S': case "Down": case "ArrowDown":
             moveCatNRat(dir.DOWN);
             _move = true;
             break;
-          case 'd': case 'D':
+          case 'd': case 'D': case "Right": case "ArrowRight":
             moveCatNRat(dir.RIGHT);
             _move = true;
             break;
@@ -134,11 +134,11 @@ document.addEventListener("keydown", function(e){
       break;
     case modes.EDITOR:
       switch(e.key){
-        case 'w': case 'W':
+        case 'w': case 'W': case "Up": case "ArrowUp":
           if(cursor >= type_list.length - 1){ cursor = 0; }
           else{ cursor++; }
           break;
-        case 's': case 'S':
+        case 's': case 'S': case "Down": case "ArrowDown":
           if(cursor <= 0){ cursor = type_list.length - 1; }
           else{ cursor--; }
           break;

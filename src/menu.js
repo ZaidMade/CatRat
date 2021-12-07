@@ -36,8 +36,8 @@ function initLevelAccess(){
   if(!levelAccess.length){
     for(var _i = 0; _i < levels.length; _i++){
       var _access = true;
-      if(_i > 5)
-        _access = false;
+      //if(_i > 5)
+        //_access = false;
       levelAccess.push(_access);
     }
   }
