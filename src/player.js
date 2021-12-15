@@ -142,18 +142,10 @@ function moveCatNRat(_dir){
         break;
 
       // Push blocks if able to
+      case types.YARN:
       case types.PUSH:
         if(e.x == tCat.x && e.y == tCat.y){
           var _m = e.move(tCat.mx, tCat.my);
-          if(!_m.moved){ halt[0] = true; }
-          if(_m.delete){ entities.splice(_i, 1); }
-        }
-        if(e.x == tRat.x && e.y == tRat.y){ halt[1] = true; }
-        break;
-      // Push blocks if able to
-      case types.YARN:
-        if(e.x == tCat.x && e.y == tCat.y){
-          var _m = e.move(tCat.x - cat.x, tCat.y - cat.y);
           if(!_m.moved){ halt[0] = true; }
           if(_m.delete){ entities.splice(_i, 1); }
         }

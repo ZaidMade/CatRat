@@ -71,17 +71,11 @@ class Push extends Entity{
   move(_dx, _dy){
     var _push = { x: this.x + _dx, y: this.y + _dy };
 
-    // Screen wrap for x
-    if(_push.x < 0)
-      _push.x = MAP_SIZE[0] - 1;
-    else if(_push.x >= MAP_SIZE[0])
-      _push.x = 0;
-
-    // Screen wrap for y
-    if(_push.y < 0)
-      _push.y = MAP_SIZE[1] - 1;
-    else if(_push.y >= MAP_SIZE[1])
-      _push.y = 0;
+    // Screen wrap
+    if(_push.x < 0 || _push.x >= MAP_SIZE[0])
+      _push.x = (_push.x < 0)? MAP_SIZE[0] - 1 : 0;
+    if(_push.y < 0 || _push.y >= MAP_SIZE[1])
+      _push.y = (_push.y < 0)? MAP_SIZE[1] - 1 : 0;
 
     var _delete = false;
 
@@ -193,6 +187,8 @@ class Yarn extends Push{
                 break;
             }
             _y -= 1;
+            if(_y < 0)
+              _y = MAP_SIZE[1] - 1;
             break;
           case dir.UP:
             switch(this.last_dir){
@@ -210,6 +206,8 @@ class Yarn extends Push{
                 break;
             }
             _y += 1;
+            if(_y >= MAP_SIZE[1])
+              _y = 0;
             break;
           case dir.LEFT:
             switch(this.last_dir){
@@ -227,6 +225,8 @@ class Yarn extends Push{
                 break;
             }
             _x += 1;
+            if(_x >= MAP_SIZE[0])
+              _x = 0;
             break;
           case dir.RIGHT:
             switch(this.last_dir){
@@ -244,6 +244,8 @@ class Yarn extends Push{
                 break;
             }
             _x -= 1;
+            if(_x < 0)
+              _x = MAP_SIZE[0] - 1;
             break;
         }
 
